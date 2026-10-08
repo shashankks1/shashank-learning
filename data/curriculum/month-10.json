@@ -1,0 +1,202 @@
+{
+  "month": {
+    "n": 10,
+    "title": "Product discovery + business",
+    "theme": "Find consequential problems, gather evidence, and reason about value and distribution before building.",
+    "build": "Opportunity research dossier",
+    "mastery": "Explain why a problem is worth solving using actual evidence.",
+    "checkpoint": "A dossier on one opportunity with interviews, a sizing model, alternatives, a business-model hypothesis and the result of a cheap test."
+  },
+  "weeks": [
+    {
+      "n": 37,
+      "month": 10,
+      "title": "Problem discovery",
+      "objective": "Notice expensive problems in the world around you, and describe them without jumping to solutions.",
+      "areas": ["product", "founder"],
+      "hours": [6, 8],
+      "learn": [
+        "Problems vs solutions vs features",
+        "Where problems hide: workarounds, spreadsheets, WhatsApp groups, complaints, job posts",
+        "Frequency × severity × willingness to act",
+        "Observing without pitching",
+        "Your unfair advantages: design skill, industry access, Indian SMB context",
+        "Problem statements that are specific and testable",
+        "Keeping an opportunity log"
+      ],
+      "practice": [
+        "Log 10 observations in the Opportunity Lab this week, with no solutions allowed",
+        "Find 3 spreadsheets or WhatsApp workflows people use to run a business",
+        "Read 20 negative reviews of a popular SMB tool",
+        "Rewrite 3 vague problems as specific ones"
+      ],
+      "build": {
+        "title": "10 observations, 3 deep-dives",
+        "brief": "Fill the Opportunity Lab with 10 real observations. Pick 3 and complete every field: who, frequency, workaround, cost, existing solutions, and why they fall short."
+      },
+      "prove": "Pick your strongest observation and defend it against 'nobody would pay for that' with evidence, not enthusiasm.",
+      "masteryId": null,
+      "reflect": ["Which problem did you want to be real more than the evidence supported?"],
+      "ship": "Opportunity Lab entries summarised in a public, anonymised note.",
+      "tryFirst": {
+        "task": "Rewrite this as a specific, testable problem: 'Small businesses struggle with marketing.'",
+        "hint": "Who exactly? Doing what? How often? What do they do today, and what does it cost them?",
+        "explanation": "Vague problems can't be tested or solved. A good problem statement names a specific person, situation, frequency, current workaround and cost, and each part can be checked in an interview.",
+        "solution": "'Owners of single-location bakeries in tier-2 Indian cities spend 3–5 hours a week making festival and offer posts on Canva or WhatsApp, often post late or skip festivals, and believe they lose walk-in sales on peak days. Today they ask a nephew or reuse last year's design.'\n\nTestable parts: who, hours per week, missed posts, belief about lost sales, current workaround."
+      },
+      "resources": [
+        { "title": "Paul Graham · How to get startup ideas", "url": "https://paulgraham.com/startupideas.html", "type": "article" },
+        { "title": "The Mom Test (Rob Fitzpatrick)", "url": "https://www.momtestbook.com/", "type": "book" },
+        { "title": "Product Talk (Teresa Torres)", "url": "https://www.producttalk.org/", "type": "article" }
+      ]
+    },
+    {
+      "n": 38,
+      "month": 10,
+      "title": "User research",
+      "objective": "Learn the truth from real people through conversations that don't lead the witness.",
+      "areas": ["product", "founder"],
+      "hours": [6, 8],
+      "learn": [
+        "The Mom Test: talk about their life, not your idea",
+        "Recruiting: who to talk to and how to reach them",
+        "Interview scripts: open questions about specific past events",
+        "Note-taking: verbatim vs interpretation",
+        "Synthesis: affinity mapping, patterns, contradictions",
+        "Ethics: consent, privacy, payment",
+        "Signals of real pain: workarounds, spend, urgency"
+      ],
+      "practice": [
+        "Write an interview script with zero leading questions",
+        "Do a practice interview with a friend and critique yourself",
+        "Recruit 5 people who have your top problem",
+        "Affinity-map your notes in FigJam"
+      ],
+      "build": {
+        "title": "5 interviews + synthesis",
+        "brief": "Interview 5 people about your top opportunity. Record the evidence in the Opportunity Lab (with consent) and synthesise it: patterns, quotes, surprises, and what changed your mind."
+      },
+      "prove": "Show where your interviews contradicted your assumptions, with quotes.",
+      "masteryId": null,
+      "reflect": ["What did you hear that you didn't want to hear?"],
+      "ship": "Synthesis board and an anonymised findings note.",
+      "tryFirst": {
+        "task": "Fix these two questions: 'Would you use an app that automates your invoicing?' and 'Don't you hate chasing payments?'",
+        "hint": "Ask about specific past behaviour, not hypothetical futures or your idea. Don't put the answer in the question.",
+        "explanation": "People are kind about hypotheticals and agree with leading questions. Past behaviour is evidence: what they did last time, how long it took, what they spent, what they tried.",
+        "solution": "Instead of 'Would you use…?':\n  'Walk me through the last time you sent an invoice. What happened after that?'\nInstead of 'Don't you hate…?':\n  'When did a payment last arrive late? What did you do about it?'\nFollow-ups: 'How often does that happen?' · 'What have you tried?' · 'What did it cost you?'"
+      },
+      "resources": [
+        { "title": "NN/g · User interviews 101", "url": "https://www.nngroup.com/articles/user-interviews/", "type": "article" },
+        { "title": "Continuous Discovery Habits (Teresa Torres)", "url": "https://www.producttalk.org/continuous-discovery-habits-book/", "type": "book" },
+        { "title": "The Mom Test (Rob Fitzpatrick)", "url": "https://www.momtestbook.com/", "type": "book" }
+      ]
+    },
+    {
+      "n": 39,
+      "month": 10,
+      "title": "Opportunity sizing",
+      "objective": "Estimate whether a problem is big enough to matter, bottom-up, with stated assumptions.",
+      "areas": ["business", "founder"],
+      "hours": [6, 8],
+      "learn": [
+        "TAM / SAM / SOM, and why top-down numbers mislead",
+        "Bottom-up sizing: customers × price × frequency",
+        "Finding data: government statistics, industry reports, proxies",
+        "Assumptions as variables you can test",
+        "Sensitivity: which assumption matters most",
+        "Market timing: why now?",
+        "Small markets that are still great businesses"
+      ],
+      "practice": [
+        "Size your top opportunity bottom-up in a spreadsheet",
+        "Find 3 independent data sources for your customer count",
+        "Change each assumption by ±50% and see what moves",
+        "Write a one-paragraph 'why now'"
+      ],
+      "build": {
+        "title": "Sizing model",
+        "brief": "A bottom-up sizing spreadsheet for your top opportunity, with sources, assumptions, sensitivity and a 'why now'. Update the opportunity's market and timing scores with notes."
+      },
+      "prove": "Defend your biggest assumption with a source, or admit it's a guess and design a test for it.",
+      "masteryId": null,
+      "reflect": ["Which assumption carries the whole model?"],
+      "ship": "Sizing model (spreadsheet) plus a short memo.",
+      "tryFirst": {
+        "task": "Size, bottom-up, the market for a ₹499/month posting tool for Indian bakeries.",
+        "hint": "How many bakeries are there? What fraction are reachable and digitally active? What fraction might pay? Multiply by price × 12.",
+        "explanation": "Bottom-up sizing makes every assumption visible and testable. The point isn't precision; it's knowing which number matters most and how to check it.",
+        "solution": "Bakeries (organised + unorganised, estimate):  ~1,00,000   [source / assumption]\nActive on WhatsApp/Instagram for business:     × 40% = 40,000\nWould pay for posts (from interviews):          × 10% =  4,000\nRevenue: 4,000 × ₹499 × 12 ≈ ₹2.4 crore a year\n\nBiggest sensitivity: the 10% willingness to pay. Test it with a pre-sale."
+      },
+      "resources": [
+        { "title": "Y Combinator · Startup School", "url": "https://www.startupschool.org/", "type": "tutorial" },
+        { "title": "Total addressable market (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Total_addressable_market", "type": "article" },
+        { "title": "Open Government Data Platform India", "url": "https://www.data.gov.in/", "type": "docs" }
+      ]
+    },
+    {
+      "n": 40,
+      "month": 10,
+      "title": "Business models and distribution",
+      "objective": "Decide who pays, for what, and how they'll find you, then test the cheapest version.",
+      "areas": ["business", "founder"],
+      "hours": [6, 8],
+      "learn": [
+        "Business models: subscription, usage, transaction, services, marketplace",
+        "Value metric: what the price scales with",
+        "Pricing in India: willingness to pay, UPI, GST basics",
+        "Distribution channels: direct, partners, content, communities, marketplaces",
+        "Unit economics (CAC, LTV, payback) as intuition, not a finance degree",
+        "Doing things that don't scale",
+        "Pre-sales and concierge tests"
+      ],
+      "practice": [
+        "Map how 3 SMB tools you know acquire their customers",
+        "Write 3 pricing hypotheses and how you'd test each",
+        "Estimate customer acquisition cost for one channel",
+        "Design a concierge test you could run in a week"
+      ],
+      "build": {
+        "title": "Opportunity research dossier",
+        "brief": "Bring it all together: problem, evidence, interviews, sizing, alternatives, business model, distribution plan, risks, and the result of one cheap test (pre-sale, waitlist or concierge)."
+      },
+      "prove": "Mastery test: explain why this problem is worth solving, using actual evidence.",
+      "masteryId": "m13",
+      "reflect": ["What would make you stop pursuing this opportunity?"],
+      "ship": "Dossier published (anonymised) in your portfolio repo.",
+      "tryFirst": {
+        "task": "Design a one-week test of whether bakery owners will pay ₹499 a month for done-for-you festival posts, without writing any software.",
+        "hint": "Deliver the service by hand to a few customers. What would count as real commitment rather than polite interest?",
+        "explanation": "A concierge test delivers the value manually, to learn whether people pay and what they actually need. Real commitment means money, time or reputational risk, not 'sounds great'.",
+        "solution": "1. Pick 15 bakeries from your interviews or neighbourhood.\n2. Offer: 'Diwali posts for your shop, ready for WhatsApp: ₹499 for festival week, pay by UPI after you see the first post.'\n3. Make the posts yourself (Figma + templates).\n4. Success criterion, set in advance: at least 4 of 15 pay, and at least 2 ask about the next festival.\n5. Record who paid, the objections, and what they asked you to change."
+      },
+      "resources": [
+        { "title": "Paul Graham · Do things that don't scale", "url": "https://paulgraham.com/ds.html", "type": "article" },
+        { "title": "Y Combinator · Startup Library", "url": "https://www.ycombinator.com/library", "type": "article" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m13",
+      "week": 40,
+      "area": "product",
+      "title": "Why this problem is worth solving",
+      "challenge": "Make the case to a sceptical reviewer that one problem in your Opportunity Lab is worth solving, using evidence you gathered yourself.",
+      "constraints": [
+        "Evidence must be first-hand: interviews, observations, test results",
+        "Assumptions are labelled as assumptions",
+        "Under 10 minutes or 1,500 words"
+      ],
+      "criteria": [
+        "A specific problem statement: who, situation, frequency, current workaround, cost",
+        "At least 5 interviews or observations cited",
+        "Bottom-up sizing with the key assumption identified",
+        "Existing solutions, and why they fall short, in users' own words",
+        "One cheap test run, with a success criterion set in advance and an honest result",
+        "States what would make you stop"
+      ],
+      "evidence": ["document", "explanation"]
+    }
+  ]
+}

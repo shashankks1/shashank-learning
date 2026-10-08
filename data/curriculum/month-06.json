@@ -1,0 +1,203 @@
+{
+  "month": {
+    "n": 6,
+    "title": "Auth + security + reliability",
+    "theme": "Make the app safe for more than one person, and less fragile when things go wrong.",
+    "build": "Authenticated multi-user application",
+    "mastery": "Threat-model the application and identify major failure points.",
+    "checkpoint": "A multi-user app where users can only see their own data, with a written threat model and tested failure paths."
+  },
+  "weeks": [
+    {
+      "n": 21,
+      "month": 6,
+      "title": "Authentication",
+      "objective": "Let people prove who they are, using proven providers rather than home-made password code.",
+      "areas": ["backend"],
+      "hours": [6, 8],
+      "learn": [
+        "Authentication vs authorization",
+        "Sessions vs tokens (cookies, JWTs)",
+        "Passwords, hashing, and why you shouldn't roll your own",
+        "OAuth and 'Sign in with Google', conceptually",
+        "Magic links and passkeys",
+        "Managed auth providers (Supabase Auth, Auth.js, Clerk)",
+        "Protecting routes on the server"
+      ],
+      "practice": [
+        "Draw the sign-in flow for a magic link, step by step",
+        "Inspect the cookies set when you log in to a site you use",
+        "Add sign-in to a throwaway app with a managed provider",
+        "Visit a protected page while logged out and confirm the server blocks it"
+      ],
+      "build": {
+        "title": "Sign-in for the client tracker",
+        "brief": "Add authentication to your client tracker using a managed provider. Protected routes redirect to sign-in, sign-out works, and sessions survive a refresh."
+      },
+      "prove": "Explain what is stored where (browser, server, provider) after sign-in, and what happens on sign-out.",
+      "masteryId": null,
+      "reflect": ["What did the auth provider do that you would never have thought to build?"],
+      "ship": "Deployed app with working sign-in and sign-out.",
+      "tryFirst": {
+        "task": "A page /dashboard should only render for signed-in users. Where must that check happen, and why isn't hiding the link enough?",
+        "hint": "Anything in the browser can be bypassed by typing a URL or calling the API directly.",
+        "explanation": "UI checks are for convenience; server checks are for security. Check the session on the server before rendering or returning data, and redirect if there is no session.",
+        "solution": "// app/dashboard/page.tsx (server component)\nimport { redirect } from 'next/navigation';\n\nexport default async function Dashboard() {\n  const session = await getSession();   // from your auth provider\n  if (!session) redirect('/sign-in');\n  const projects = await getProjectsFor(session.user.id);\n  return <ProjectList projects={projects} />;\n}"
+      },
+      "resources": [
+        { "title": "OWASP · Authentication cheat sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html", "type": "docs" },
+        { "title": "Supabase · Auth", "url": "https://supabase.com/docs/guides/auth", "type": "docs" },
+        { "title": "Auth.js", "url": "https://authjs.dev/", "type": "docs" }
+      ]
+    },
+    {
+      "n": 22,
+      "month": 6,
+      "title": "Authorization",
+      "objective": "Make sure every user can only see and change what they're allowed to, enforced where it can't be bypassed.",
+      "areas": ["backend", "databases"],
+      "hours": [6, 8],
+      "learn": [
+        "Ownership: every row belongs to someone",
+        "Checking permissions on every read and write",
+        "Roles (owner, member, viewer)",
+        "Row Level Security in Postgres",
+        "Insecure direct object references (changing an id in the URL)",
+        "Least privilege for keys and services",
+        "Testing authorization with two accounts"
+      ],
+      "practice": [
+        "Create two accounts and try to read user B's record as user A",
+        "Write an RLS policy that restricts rows to their owner",
+        "Add a 'viewer' role that can read but not edit",
+        "List every endpoint and who should be allowed to call it"
+      ],
+      "build": {
+        "title": "Multi-user client tracker",
+        "brief": "Each user sees only their own clients and projects, and a project can be shared with a 'viewer'. Enforce it in the database (RLS) or on every server query."
+      },
+      "prove": "Two-browser test: document 5 attempts to access the other user's data and show each one failing.",
+      "masteryId": null,
+      "reflect": ["Which endpoint did you forget to protect at first?"],
+      "ship": "A permissions table (who can do what) in the README, and the deployed app.",
+      "tryFirst": {
+        "task": "Write a rule so users can only select their own projects (projects.owner_id = the signed-in user).",
+        "hint": "Postgres can attach a policy to a table that filters every query automatically. Supabase exposes the current user's id via auth.uid().",
+        "explanation": "Row Level Security applies the rule inside the database, so even a buggy query or a direct API call can't return another user's rows.",
+        "solution": "ALTER TABLE projects ENABLE ROW LEVEL SECURITY;\n\nCREATE POLICY \"owners read their projects\"\n  ON projects FOR SELECT\n  USING (owner_id = auth.uid());"
+      },
+      "resources": [
+        { "title": "OWASP · Authorization cheat sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html", "type": "docs" },
+        { "title": "Supabase · Row Level Security", "url": "https://supabase.com/docs/guides/database/postgres/row-level-security", "type": "docs" },
+        { "title": "OWASP · IDOR prevention", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Insecure_Direct_Object_Reference_Prevention_Cheat_Sheet.html", "type": "docs" }
+      ]
+    },
+    {
+      "n": 23,
+      "month": 6,
+      "title": "Security fundamentals",
+      "objective": "Think like an attacker for an afternoon so your users don't have to.",
+      "areas": ["backend"],
+      "hours": [6, 8],
+      "learn": [
+        "The OWASP Top 10 at a working level",
+        "XSS: why you never render untrusted HTML",
+        "CSRF and SameSite cookies",
+        "Secrets management: environment variables, rotation, never in git",
+        "Dependency risk: npm audit, lockfiles",
+        "Security headers (Content Security Policy basics)",
+        "Rate limiting and abuse"
+      ],
+      "practice": [
+        "Try an XSS payload in every text field of your app",
+        "Search your git history for leaked secrets, and rotate any you find",
+        "Run npm audit and decide what actually matters",
+        "Check your site's response headers with securityheaders.com"
+      ],
+      "build": {
+        "title": "Security pass",
+        "brief": "Run a structured security review of your client tracker against the OWASP Top 10. Fix the top issues, add rate limiting to sign-in and write endpoints, and document what you checked."
+      },
+      "prove": "Write a one-page security review: what you tested, what you found, what you fixed, and what remains.",
+      "masteryId": null,
+      "reflect": ["What would an attacker find first in your app?"],
+      "ship": "SECURITY.md in the repo, with the fixes merged.",
+      "tryFirst": {
+        "task": "A comment field shows user text on a page. Someone submits: <img src=x onerror=alert(1)>. What happens with plain innerHTML vs React, and what's the rule?",
+        "hint": "One of these treats text as text. The other treats text as code.",
+        "explanation": "innerHTML parses the string as HTML, so the onerror handler runs (XSS). React escapes text by default; the danger only returns if you use dangerouslySetInnerHTML. The rule: render untrusted input as text, and sanitise it if you truly need HTML.",
+        "solution": "// Dangerous\ncommentEl.innerHTML = comment;\n\n// Safe\ncommentEl.textContent = comment;\n\n// React is safe by default\n<p>{comment}</p>\n\n// Only if HTML is required: sanitise first (e.g. DOMPurify)\n<p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(comment) }} />"
+      },
+      "resources": [
+        { "title": "OWASP Top 10", "url": "https://owasp.org/www-project-top-ten/", "type": "docs" },
+        { "title": "MDN · Web security", "url": "https://developer.mozilla.org/en-US/docs/Web/Security", "type": "docs" },
+        { "title": "OWASP · XSS prevention cheat sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html", "type": "docs" }
+      ]
+    },
+    {
+      "n": 24,
+      "month": 6,
+      "title": "Error handling, validation and reliability",
+      "objective": "Design for failure: validate everything, fail visibly and recover gracefully.",
+      "areas": ["backend", "product"],
+      "hours": [6, 8],
+      "learn": [
+        "Validation on the client (for UX) and on the server (for truth)",
+        "Error boundaries and user-facing error messages",
+        "Timeouts, retries with backoff, and idempotency keys",
+        "Logging and error monitoring (for example Sentry)",
+        "Graceful degradation when a dependency is down",
+        "Backups and restore",
+        "Writing a runbook"
+      ],
+      "practice": [
+        "Simulate a slow and a failing database call, and see what the user sees",
+        "Add a timeout and a bounded retry to one external call",
+        "Make 'create invoice' safe to retry with an idempotency key",
+        "Add error monitoring and trigger a test error"
+      ],
+      "build": {
+        "title": "Reliability pass",
+        "brief": "Make the client tracker resilient: error boundaries, consistent error responses, timeouts and retries on external calls, error monitoring, and a restore-from-backup test."
+      },
+      "prove": "Mastery test: threat-model the application and identify its major failure points.",
+      "masteryId": "m09",
+      "reflect": ["Which failure would have lost a user's data before this week?"],
+      "ship": "A runbook (RUNBOOK.md), the threat model, and the deployed resilient app.",
+      "tryFirst": {
+        "task": "A 'Create invoice' button sometimes gets clicked twice on slow connections and creates duplicate invoices. Fix it properly.",
+        "hint": "Disabling the button helps, but the server is the source of truth. How could the server recognise the same request arriving twice?",
+        "explanation": "Use an idempotency key: the client generates a unique key per intended action and sends it, and the server stores it with the result, so a repeat returns the same result instead of creating a duplicate. Disable the button as well, for UX rather than correctness.",
+        "solution": "// client\nconst key = crypto.randomUUID();\nawait fetch('/api/invoices', {\n  method: 'POST',\n  headers: { 'Idempotency-Key': key },\n  body: JSON.stringify(invoice),\n});\n\n-- server: a UNIQUE constraint makes repeats harmless\nCREATE TABLE invoices (\n  id uuid PRIMARY KEY,\n  idempotency_key text UNIQUE NOT NULL\n  -- ...other columns\n);"
+      },
+      "resources": [
+        { "title": "OWASP · Input validation cheat sheet", "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html", "type": "docs" },
+        { "title": "Stripe · Idempotent requests", "url": "https://docs.stripe.com/api/idempotent_requests", "type": "docs" },
+        { "title": "Google · Site Reliability Engineering (free book)", "url": "https://sre.google/sre-book/table-of-contents/", "type": "book" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m09",
+      "week": 24,
+      "area": "backend",
+      "title": "Threat-model your application",
+      "challenge": "Produce a threat model for your multi-user app: what you're protecting, who might attack or break it, how, and what you've done about it. Then prove that three of the defences work.",
+      "constraints": [
+        "Use your own deployed app, not a hypothetical one",
+        "Use a simple framework (STRIDE, or assets, threats and mitigations)",
+        "Demonstrate rather than assert: each defence you claim needs evidence"
+      ],
+      "criteria": [
+        "Lists assets (data, accounts, secrets) and trust boundaries on a diagram",
+        "Identifies at least 8 threats or failure points, ranked by likelihood × impact",
+        "Shows three defences working (e.g. cross-user access blocked, XSS escaped, rate limit triggered)",
+        "Names the top residual risks you haven't fixed, and why",
+        "Includes failure points that aren't attacks (outages, bad data, double submits)",
+        "A non-security person can follow it"
+      ],
+      "evidence": ["github", "document", "explanation"]
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "month": {
+    "n": 3,
+    "title": "React + TypeScript",
+    "theme": "Build component-based interfaces with predictable state and types, the way most product teams build today.",
+    "build": "Small React + TypeScript application",
+    "mastery": "Explain component architecture and state flow.",
+    "checkpoint": "A typed React app with reusable components and a written explanation of where state lives and why."
+  },
+  "weeks": [
+    {
+      "n": 9,
+      "month": 3,
+      "title": "React fundamentals",
+      "objective": "Think in components: break a UI into pieces, pass data down with props, and render lists.",
+      "areas": ["frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Why React: UI as a function of state",
+        "Components and JSX",
+        "Props: data flows down",
+        "Rendering lists with keys",
+        "Conditional rendering",
+        "Vite: creating and running a React project",
+        "React DevTools: inspecting the component tree"
+      ],
+      "practice": [
+        "Take a Figma screen you designed and draw its component tree on paper",
+        "Build a Card component and render 6 cards from an array",
+        "Show an empty state when the array is empty",
+        "Inspect your tree in React DevTools"
+      ],
+      "build": {
+        "title": "Contact list, rebuilt in React",
+        "brief": "Rebuild your Week 6 contact list in React with components: App, ContactForm, ContactList, ContactCard, TagFilter. Compare the two codebases."
+      },
+      "prove": "Draw the component tree and props for your app from memory, then check it against React DevTools.",
+      "masteryId": null,
+      "reflect": ["What got easier in React compared with plain DOM code, and what got more confusing?"],
+      "ship": "React contact list on GitHub with a component diagram in the README.",
+      "tryFirst": {
+        "task": "Render a list of contacts as cards, with a fallback message if there are none.",
+        "hint": "Arrays have a method that turns each item into something else. Every item in a rendered list needs a stable key.",
+        "explanation": "JSX lets you map data into elements. Keys tell React which item is which between renders, so use a stable id rather than the array index when items can be reordered or deleted.",
+        "solution": "function ContactList({ contacts }) {\n  if (contacts.length === 0) return <p>No contacts yet.</p>;\n  return (\n    <ul>\n      {contacts.map(contact => (\n        <ContactCard key={contact.id} contact={contact} />\n      ))}\n    </ul>\n  );\n}"
+      },
+      "resources": [
+        { "title": "React · Learn", "url": "https://react.dev/learn", "type": "docs" },
+        { "title": "React · Thinking in React", "url": "https://react.dev/learn/thinking-in-react", "type": "docs" },
+        { "title": "Vite · Getting started", "url": "https://vite.dev/guide/", "type": "docs" }
+      ]
+    },
+    {
+      "n": 10,
+      "month": 3,
+      "title": "Components and state",
+      "objective": "Decide where state lives, lift it when siblings need it, and derive everything else.",
+      "areas": ["frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "useState and re-rendering",
+        "State vs props",
+        "Lifting state up to a common parent",
+        "Derived state: compute it, don't store it",
+        "Immutable updates for arrays and objects",
+        "Component boundaries: when to split",
+        "Composition with children"
+      ],
+      "practice": [
+        "Build a counter, then a toggle, then a tabs component",
+        "Lift a search query so a SearchBox and a List can share it",
+        "Replace a stored 'filteredItems' with a derived value",
+        "Refactor one large component into three"
+      ],
+      "build": {
+        "title": "Habit tracker",
+        "brief": "Track a few habits across the week: add habits, tick off days, and see a streak per habit. Decide deliberately where each piece of state lives and write it down."
+      },
+      "prove": "Explain, with a diagram, where every piece of state in your habit tracker lives and why.",
+      "masteryId": null,
+      "reflect": ["Which piece of state did you store that you could have derived?"],
+      "ship": "Habit tracker on GitHub with a 'state map' in the README.",
+      "tryFirst": {
+        "task": "A SearchBox and a ResultList are siblings. Typing in the SearchBox should filter the ResultList.",
+        "hint": "Siblings can't talk to each other directly. Find their closest common parent.",
+        "explanation": "Lift the query into the parent. Pass the value and a setter down to SearchBox, and pass the filtered list (derived during render) down to ResultList. One source of truth.",
+        "solution": "function Directory({ people }) {\n  const [query, setQuery] = useState('');\n  const visible = people.filter(p =>\n    p.name.toLowerCase().includes(query.toLowerCase())\n  );\n  return (\n    <>\n      <SearchBox value={query} onChange={setQuery} />\n      <ResultList people={visible} />\n    </>\n  );\n}"
+      },
+      "resources": [
+        { "title": "React · Managing state", "url": "https://react.dev/learn/managing-state", "type": "docs" },
+        { "title": "React · Sharing state between components", "url": "https://react.dev/learn/sharing-state-between-components", "type": "docs" },
+        { "title": "React · Choosing the state structure", "url": "https://react.dev/learn/choosing-the-state-structure", "type": "docs" }
+      ]
+    },
+    {
+      "n": 11,
+      "month": 3,
+      "title": "Forms, events and data",
+      "objective": "Build forms that validate, guide and recover, and load and save data without spaghetti.",
+      "areas": ["frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Controlled inputs",
+        "Form submission and validation messages",
+        "Accessible forms: labels, and errors linked with aria-describedby",
+        "useEffect: synchronising with things outside React, and when not to use it",
+        "Fetching data in React: loading, error, success",
+        "Persisting to localStorage",
+        "Custom hooks to reuse logic"
+      ],
+      "practice": [
+        "Build a sign-up form whose inline errors only appear after the field loses focus",
+        "Write a useLocalStorage hook",
+        "Fetch a list in a component with a loading skeleton and a retry button",
+        "Find one useEffect you can delete"
+      ],
+      "build": {
+        "title": "Habit tracker: forms, editing and persistence",
+        "brief": "Add create and edit forms with validation, persistence across refresh, and an import of starter habits from a JSON file. Every async path has a visible state."
+      },
+      "prove": "Break your own form: empty input, very long input, emoji, pasted spaces, double submit. Fix what fails and list the cases in the README.",
+      "masteryId": null,
+      "reflect": ["When did you reach for useEffect, and did you actually need it?"],
+      "ship": "Updated habit tracker deployed (Vercel, Netlify or GitHub Pages).",
+      "tryFirst": {
+        "task": "Build a controlled email input that shows 'Enter a valid email' only after the user leaves the field.",
+        "hint": "You need two pieces of state: the value, and whether the field has been touched. The error itself is derived.",
+        "explanation": "Showing errors while someone is still typing is hostile. Track 'touched' on blur, derive the error from the value, and connect the message to the input with aria-describedby so screen readers hear it.",
+        "solution": "function EmailField() {\n  const [email, setEmail] = useState('');\n  const [touched, setTouched] = useState(false);\n  const invalid = touched && !/^\\S+@\\S+\\.\\S+$/.test(email);\n  return (\n    <label>\n      Email\n      <input value={email} onChange={e => setEmail(e.target.value)}\n        onBlur={() => setTouched(true)} aria-invalid={invalid}\n        aria-describedby=\"email-error\" />\n      {invalid && <span id=\"email-error\">Enter a valid email</span>}\n    </label>\n  );\n}"
+      },
+      "resources": [
+        { "title": "React · Reacting to input with state", "url": "https://react.dev/learn/reacting-to-input-with-state", "type": "docs" },
+        { "title": "React · You might not need an effect", "url": "https://react.dev/learn/you-might-not-need-an-effect", "type": "docs" },
+        { "title": "MDN · Client-side form validation", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation", "type": "docs" }
+      ]
+    },
+    {
+      "n": 12,
+      "month": 3,
+      "title": "TypeScript fundamentals",
+      "objective": "Use types to make impossible states impossible and let the compiler catch bugs before users do.",
+      "areas": ["frontend", "programming"],
+      "hours": [6, 8],
+      "learn": [
+        "Why types: catching mistakes while you write",
+        "Basic types, arrays, objects, optional properties",
+        "Type aliases and interfaces",
+        "Union types and narrowing",
+        "Typing React props and state",
+        "Discriminated unions for loading, success and error",
+        "Reading TypeScript errors"
+      ],
+      "practice": [
+        "Type your contact and habit data shapes",
+        "Model a request as a discriminated union and switch on it",
+        "Turn on strict mode and fix every error",
+        "Find one real bug the compiler caught"
+      ],
+      "build": {
+        "title": "Habit tracker in TypeScript",
+        "brief": "Convert the habit tracker to TypeScript with strict mode on. No 'any' for app data. Model async data as a discriminated union."
+      },
+      "prove": "Mastery test: build a small React + TypeScript app and explain its component architecture and state flow.",
+      "masteryId": "m06",
+      "reflect": ["Which bug would TypeScript have caught in your earlier projects?"],
+      "ship": "TypeScript habit tracker on GitHub, with your architecture explanation in the README.",
+      "tryFirst": {
+        "task": "Model a data request that can be idle, loading, loaded with data, or failed with a message, so that it is impossible to read the data while it is loading.",
+        "hint": "Instead of several booleans, use one 'status' field, and let each status carry only the fields that make sense for it.",
+        "explanation": "A discriminated union shares a literal 'status' field. After you check status === 'success', TypeScript knows data exists. Booleans such as isLoading plus isError allow nonsense combinations; a union doesn't.",
+        "solution": "type Request<T> =\n  | { status: 'idle' }\n  | { status: 'loading' }\n  | { status: 'success'; data: T }\n  | { status: 'error'; message: string };\n\nfunction describe(req: Request<Habit[]>) {\n  switch (req.status) {\n    case 'success': return `${req.data.length} habits`;\n    case 'error': return req.message;\n    default: return 'Loading…';\n  }\n}"
+      },
+      "resources": [
+        { "title": "TypeScript Handbook", "url": "https://www.typescriptlang.org/docs/handbook/intro.html", "type": "docs" },
+        { "title": "TypeScript · Narrowing", "url": "https://www.typescriptlang.org/docs/handbook/2/narrowing.html", "type": "docs" },
+        { "title": "React TypeScript Cheatsheet", "url": "https://react-typescript-cheatsheet.netlify.app/", "type": "article" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m06",
+      "week": 12,
+      "area": "frontend",
+      "title": "Explain component architecture and state flow",
+      "challenge": "Build a small React + TypeScript app from a blank Vite project (a reading list, a moodboard organiser, a client-brief checklist), then explain its architecture.",
+      "constraints": [
+        "Start from an empty Vite template, not a starter kit",
+        "No tutorial for this app; React and TypeScript docs are allowed",
+        "AI may review your code after you've written it, not write it"
+      ],
+      "criteria": [
+        "At least 5 components with clear responsibilities",
+        "Strict TypeScript, no 'any' for app data",
+        "State lives in the right place, and derived values aren't stored",
+        "Async or persisted data has explicit loading and error states",
+        "A component and state diagram you drew yourself",
+        "You can explain what re-renders when a user types, and why"
+      ],
+      "evidence": ["github", "live", "explanation"]
+    }
+  ]
+}

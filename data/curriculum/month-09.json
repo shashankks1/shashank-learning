@@ -1,0 +1,202 @@
+{
+  "month": {
+    "n": 9,
+    "title": "Automation + tool use",
+    "theme": "Connect systems carefully: automations that are observable, reversible and human-reviewed.",
+    "build": "An automated workflow",
+    "mastery": "Design a workflow that handles failures instead of assuming everything succeeds.",
+    "checkpoint": "One useful workflow running end to end, with logs, retries, an approval step and a tested failure path."
+  },
+  "weeks": [
+    {
+      "n": 33,
+      "month": 9,
+      "title": "Workflow mapping",
+      "objective": "See a workflow clearly before automating it (who does what, when, with which data) and where it breaks.",
+      "areas": ["automation", "product"],
+      "hours": [6, 8],
+      "learn": [
+        "Triggers, steps, decisions, outputs",
+        "Swimlanes: people and systems",
+        "The happy path vs exception paths",
+        "Manual cost: time × frequency",
+        "Where judgment is needed (keep humans there)",
+        "Data that flows between systems, and how sensitive it is",
+        "Choosing what NOT to automate"
+      ],
+      "practice": [
+        "Map your own weekly invoicing, file-delivery or content workflow",
+        "Time each step during one real run",
+        "Mark every step that can fail, and what happens then",
+        "Interview one person about a workflow they hate"
+      ],
+      "build": {
+        "title": "Workflow map + automation brief",
+        "brief": "Map one real recurring workflow (yours, or someone you know) as a swimlane diagram including exceptions, and write an automation brief: what to automate, what stays human, and the success measure."
+      },
+      "prove": "Walk the person who owns the workflow through your map and get at least two corrections.",
+      "masteryId": null,
+      "reflect": ["Which step looked automatable until you mapped its exceptions?"],
+      "ship": "The map and brief in your repo (or a FigJam link).",
+      "tryFirst": {
+        "task": "A studio's client onboarding goes: enquiry form, call, proposal, advance invoice, kickoff folder. Which steps would you automate first, and which would you never automate?",
+        "hint": "Score each step on frequency, time cost, error risk, and how much judgment it needs.",
+        "explanation": "Automate high-frequency, low-judgment, rule-based steps first (creating folders, sending templated invoices). Keep humans on judgment-heavy relationship steps (the call, scoping the proposal). Add AI only where it removes drudgery without removing accountability.",
+        "solution": "Automate first:   enquiry -> CRM row + acknowledgement email; paid invoice -> kickoff folder + checklist\nAssist, don't automate:   proposal draft from call notes (AI draft, human edits)\nNever automate:   the discovery call; pricing decisions\nMeasure:   hours per week saved, errors caught, time to kickoff"
+      },
+      "resources": [
+        { "title": "Lucidchart · Process mapping guide", "url": "https://www.lucidchart.com/pages/process-mapping", "type": "article" },
+        { "title": "BPMN overview (Wikipedia)", "url": "https://en.wikipedia.org/wiki/Business_Process_Model_and_Notation", "type": "article" }
+      ]
+    },
+    {
+      "n": 34,
+      "month": 9,
+      "title": "Webhooks + APIs",
+      "objective": "Let systems notify each other reliably, and handle the messy reality of events.",
+      "areas": ["automation", "backend"],
+      "hours": [6, 8],
+      "learn": [
+        "Polling vs webhooks",
+        "Webhook payloads and signatures (verifying the sender)",
+        "Responding fast and processing later (queues)",
+        "Duplicate and out-of-order events",
+        "Idempotent handlers",
+        "Testing webhooks locally (tunnels)",
+        "Logging every event"
+      ],
+      "practice": [
+        "Receive a webhook from GitHub or a forms tool into a local endpoint through a tunnel",
+        "Verify the signature",
+        "Replay the same event twice, and make the second one a no-op",
+        "Store raw events before processing them"
+      ],
+      "build": {
+        "title": "Webhook receiver",
+        "brief": "An endpoint that receives events from a real service (GitHub, a payment provider in test mode, a forms tool), verifies them, stores them, processes them idempotently, and shows an event log page."
+      },
+      "prove": "Send a duplicate, a forged (unsigned) and a malformed event. Show the log handling each one correctly.",
+      "masteryId": null,
+      "reflect": ["Which assumption about events turned out to be false?"],
+      "ship": "Webhook receiver on GitHub with an event-handling diagram.",
+      "tryFirst": {
+        "task": "Your webhook handler sometimes receives the same 'payment.captured' event twice and records two payments. Fix it.",
+        "hint": "Every event has an id. What if you remembered which ids you've already processed, enforced by the database?",
+        "explanation": "Treat event delivery as 'at least once'. Store the event id with a UNIQUE constraint; if the insert conflicts, you've seen it already, so acknowledge it and skip.",
+        "solution": "export async function POST(req: Request) {\n  const event = await verifyAndParse(req);   // reject bad signatures with 400\n  const inserted = await db.query(\n    'INSERT INTO events (id, type, payload) VALUES ($1, $2, $3) ON CONFLICT (id) DO NOTHING RETURNING id',\n    [event.id, event.type, event]\n  );\n  if (inserted.rowCount === 0) return new Response('duplicate', { status: 200 });\n  await processEvent(event);\n  return new Response('ok', { status: 200 });\n}"
+      },
+      "resources": [
+        { "title": "GitHub · About webhooks", "url": "https://docs.github.com/en/webhooks/about-webhooks", "type": "docs" },
+        { "title": "Stripe · Webhooks", "url": "https://docs.stripe.com/webhooks", "type": "docs" }
+      ]
+    },
+    {
+      "n": 35,
+      "month": 9,
+      "title": "Automation tools such as n8n",
+      "objective": "Build useful automations quickly with a workflow tool, and know when to drop down to code.",
+      "areas": ["automation"],
+      "hours": [6, 8],
+      "learn": [
+        "Workflow tools: triggers, nodes, credentials",
+        "n8n basics: self-hosted vs cloud",
+        "Mapping data between nodes",
+        "Error workflows and retries",
+        "Branching and approvals",
+        "Credentials and secrets in automation tools",
+        "No-code vs code: the trade-offs"
+      ],
+      "practice": [
+        "Complete the n8n Level One course",
+        "Build: form, validate, Google Sheet, email",
+        "Add an error workflow that notifies you",
+        "Rebuild one step as a small code function"
+      ],
+      "build": {
+        "title": "n8n workflow for your mapped process",
+        "brief": "Implement your Week 33 automation brief in n8n (or a similar tool): trigger, validation, the main steps, an approval step, error notification and a run log."
+      },
+      "prove": "Break it on purpose in three ways (bad input, downstream outage, duplicate trigger) and show it recovering or alerting.",
+      "masteryId": null,
+      "reflect": ["Where did the no-code tool help, and where did it get in your way?"],
+      "ship": "Exported workflow JSON, screenshots and a README in your repo.",
+      "tryFirst": {
+        "task": "Your n8n workflow posts to a client's Slack. If Slack is down, the run fails silently. Make failure visible and recoverable.",
+        "hint": "Workflow tools can run a separate workflow when one fails. And a failed step can be retried before giving up.",
+        "explanation": "Set retries with a wait on the flaky node, then an error workflow that alerts you with the run id and payload so you can re-run it manually. Silent failure is the real bug.",
+        "solution": "1. Slack node -> Settings -> Retry On Fail: 3 tries, wait 5 seconds.\n2. Workflow settings -> Error Workflow: 'Alert me'.\n3. 'Alert me' = Error Trigger -> email or Telegram with the workflow name, failed node and execution URL.\n4. Keep the original payload in a sheet or database so a manual re-run is possible."
+      },
+      "resources": [
+        { "title": "n8n documentation", "url": "https://docs.n8n.io/", "type": "docs" },
+        { "title": "n8n · Level one course", "url": "https://docs.n8n.io/courses/level-one/", "type": "tutorial" },
+        { "title": "n8n · Error handling", "url": "https://docs.n8n.io/flow-logic/error-handling/", "type": "docs" }
+      ]
+    },
+    {
+      "n": 36,
+      "month": 9,
+      "title": "AI tool calling / agents",
+      "objective": "Let a model take actions through tools, with tight permissions, approvals and an audit trail.",
+      "areas": ["ai", "automation"],
+      "hours": [6, 8],
+      "learn": [
+        "Tool calling: the model proposes, your code executes",
+        "Tool schemas and input validation",
+        "Read vs write tools; least privilege",
+        "Human approval before consequential actions",
+        "The agent loop, and why to keep it short",
+        "Model Context Protocol (MCP), conceptually",
+        "Logging every tool call"
+      ],
+      "practice": [
+        "Give a model one read-only tool and watch the calls it makes",
+        "Validate tool arguments with a schema",
+        "Add a confirmation step before a write tool runs",
+        "Make a tool fail and see how the model reacts"
+      ],
+      "build": {
+        "title": "AI step with tools in your workflow",
+        "brief": "Add an AI step to your automation that uses one read tool and one write tool (for example: look up a client, draft a follow-up), with schema validation, approval before any write, and a log of every call."
+      },
+      "prove": "Mastery test: design a workflow that handles failures instead of assuming everything succeeds.",
+      "masteryId": "m12",
+      "reflect": ["What would happen if the model called your write tool with the wrong arguments?"],
+      "ship": "Workflow with AI tool use, plus an architecture diagram and log screenshots.",
+      "tryFirst": {
+        "task": "A model wants to call send_email({ to, subject, body }). Design the execution code so this can never send an email the user didn't approve.",
+        "hint": "The model only proposes. Your code decides whether, when, and with what arguments the tool actually runs.",
+        "explanation": "Validate the arguments, check them against policy (allowed recipients), then require explicit human approval for anything with side effects. Log the proposal, the decision and the result.",
+        "solution": "async function handleToolCall(call) {\n  if (call.name !== 'send_email') throw new Error('Unknown tool');\n  const args = SendEmailArgs.parse(call.arguments);            // schema validation\n  if (!isKnownClient(args.to)) return { error: 'Recipient not allowed' };\n  const approved = await requestApproval({ tool: call.name, args }); // human in the loop\n  await auditLog.write({ call, approved });\n  if (!approved) return { status: 'rejected_by_user' };\n  return sendEmail(args);\n}"
+      },
+      "resources": [
+        { "title": "Anthropic · Tool use", "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use", "type": "docs" },
+        { "title": "OpenAI · Function calling", "url": "https://platform.openai.com/docs/guides/function-calling", "type": "docs" },
+        { "title": "Anthropic · Building effective agents", "url": "https://www.anthropic.com/engineering/building-effective-agents", "type": "article" },
+        { "title": "Model Context Protocol", "url": "https://modelcontextprotocol.io/", "type": "docs" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m12",
+      "week": 36,
+      "area": "automation",
+      "title": "A workflow that handles failure",
+      "challenge": "Run your automated workflow end to end and prove it behaves correctly when things go wrong, not just when they go right.",
+      "constraints": [
+        "A real workflow (yours or a willing person's), with test or permissioned data",
+        "Any tool or code, but every failure path must be designed, not accidental",
+        "Consequential actions require approval"
+      ],
+      "criteria": [
+        "A failure map: each step's failure mode and its designed response",
+        "A duplicate trigger is handled idempotently",
+        "A downstream outage leads to retry, then alert, then a manual recovery path",
+        "Invalid input is rejected with a useful message",
+        "Every run (and every tool call, if AI is used) is logged and inspectable",
+        "Demonstrated live or recorded: three induced failures, three correct recoveries"
+      ],
+      "evidence": ["github", "document", "explanation"]
+    }
+  ]
+}

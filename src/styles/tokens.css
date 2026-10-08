@@ -1,0 +1,121 @@
+/* Design tokens. Neutral paper and ink, one accent (the blue of the personal mark). */
+
+:root {
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --bg: #f5f4f1;
+  --surface: #ffffff;
+  --surface-2: #faf9f7;
+  --sunken: #edece8;
+  --ink: #16171b;
+  --ink-2: #3b3d44;
+  --muted: #62666f;
+  --faint: #a3a5ab;
+  --line: #e2e0db;
+  --line-strong: #cdcac3;
+  --grid-line: rgba(22, 23, 27, 0.045);
+
+  --accent: #2c57ca;
+  --accent-hover: #2349ae;
+  --accent-ink: #ffffff;
+  --accent-soft: #eaeffb;
+  --accent-line: #bccbf1;
+
+  --ok: #1d7347;
+  --ok-soft: #e4f1e9;
+  --warn: #8a5800;
+  --warn-soft: #faf0da;
+  --bad: #b0262e;
+  --bad-soft: #fae6e7;
+
+  /* Sequential ramp for the activity heatmap: one hue, light to dark. */
+  --heat-0: #e7e6e2;
+  --heat-1: #c9d6f5;
+  --heat-2: #8da8ea;
+  --heat-3: #4f75d6;
+  --heat-4: #2c57ca;
+
+  --radius-s: 6px;
+  --radius: 10px;
+  --radius-l: 14px;
+  --shadow: 0 1px 2px rgba(22, 23, 27, 0.04), 0 2px 10px rgba(22, 23, 27, 0.035);
+  --shadow-pop: 0 16px 48px rgba(22, 23, 27, 0.2), 0 2px 6px rgba(22, 23, 27, 0.08);
+  --scrim: rgba(18, 19, 22, 0.42);
+
+  --sidebar-width: 256px;
+  --content-max: 1240px;
+  --gutter: clamp(16px, 3vw, 40px);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #111215;
+    --surface: #18191d;
+    --surface-2: #1d1e23;
+    --sunken: #0d0e10;
+    --ink: #ececee;
+    --ink-2: #c8c9ce;
+    --muted: #9a9ca5;
+    --faint: #62656e;
+    --line: #2a2c32;
+    --line-strong: #3a3d45;
+    --grid-line: rgba(255, 255, 255, 0.035);
+    --accent: #84a1f3;
+    --accent-hover: #9db4f6;
+    --accent-ink: #0b1430;
+    --accent-soft: #1c2541;
+    --accent-line: #34457a;
+    --ok: #5cc28c;
+    --ok-soft: #132a1d;
+    --warn: #e0a93b;
+    --warn-soft: #2a2111;
+    --bad: #f07a80;
+    --bad-soft: #2d1517;
+    --heat-0: #222328;
+    --heat-1: #26355f;
+    --heat-2: #34519b;
+    --heat-3: #5677d8;
+    --heat-4: #8aa6f5;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-pop: 0 16px 48px rgba(0, 0, 0, 0.55);
+    --scrim: rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #111215;
+  --surface: #18191d;
+  --surface-2: #1d1e23;
+  --sunken: #0d0e10;
+  --ink: #ececee;
+  --ink-2: #c8c9ce;
+  --muted: #9a9ca5;
+  --faint: #62656e;
+  --line: #2a2c32;
+  --line-strong: #3a3d45;
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --accent: #84a1f3;
+  --accent-hover: #9db4f6;
+  --accent-ink: #0b1430;
+  --accent-soft: #1c2541;
+  --accent-line: #34457a;
+  --ok: #5cc28c;
+  --ok-soft: #132a1d;
+  --warn: #e0a93b;
+  --warn-soft: #2a2111;
+  --bad: #f07a80;
+  --bad-soft: #2d1517;
+  --heat-0: #222328;
+  --heat-1: #26355f;
+  --heat-2: #34519b;
+  --heat-3: #5677d8;
+  --heat-4: #8aa6f5;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-pop: 0 16px 48px rgba(0, 0, 0, 0.55);
+  --scrim: rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}

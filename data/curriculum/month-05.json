@@ -1,0 +1,203 @@
+{
+  "month": {
+    "n": 5,
+    "title": "Backend + SQL",
+    "theme": "Model real records, query them, and understand how a UI connects to durable storage.",
+    "build": "Database-backed application",
+    "mastery": "Design a small relational database from requirements.",
+    "checkpoint": "A CRUD app backed by Postgres with a documented schema, parameterised queries and a useful report query."
+  },
+  "weeks": [
+    {
+      "n": 17,
+      "month": 5,
+      "title": "Backend fundamentals",
+      "objective": "Write server code that receives requests, validates input, does work and responds, predictably.",
+      "areas": ["backend", "programming"],
+      "hours": [6, 8],
+      "learn": [
+        "What a server is: a long-running program listening for requests",
+        "The Node.js runtime and npm packages",
+        "Routing and handlers",
+        "Input validation at the boundary (for example with a schema library such as Zod)",
+        "Status codes and error responses you design yourself",
+        "Environment variables and configuration",
+        "Logging"
+      ],
+      "practice": [
+        "Write a tiny Node HTTP server with no framework",
+        "Rewrite it with a framework (Express, Hono or Next.js route handlers)",
+        "Add schema validation to a POST endpoint",
+        "Log every request with method, path, status and duration"
+      ],
+      "build": {
+        "title": "Studio client-intake API",
+        "brief": "An API that receives project enquiries (name, email, budget band, brief), validates them, stores them in memory or a JSON file, and lists them for an admin. Bad input gets a clear 400."
+      },
+      "prove": "Send 10 malicious or malformed requests (missing fields, huge strings, wrong types). Every one should get a clear, safe 400.",
+      "masteryId": null,
+      "reflect": ["What did you trust from the client that you shouldn't have?"],
+      "ship": "Intake API on GitHub with example requests in the README.",
+      "tryFirst": {
+        "task": "Validate a POST body: name (1–80 characters), email (valid), budget ('<50k' | '50k-2L' | '2L+'). Return 400 with field errors if it's invalid.",
+        "hint": "Describe the shape once as a schema and let a library check it. Return which fields failed, not just 'bad request'.",
+        "explanation": "A schema at the boundary is a contract: data inside your system is guaranteed valid. safeParse returns errors instead of throwing, so you can respond with structured messages per field.",
+        "solution": "import { z } from 'zod';\n\nconst Enquiry = z.object({\n  name: z.string().trim().min(1).max(80),\n  email: z.string().email(),\n  budget: z.enum(['<50k', '50k-2L', '2L+']),\n});\n\nexport async function POST(request: Request) {\n  const parsed = Enquiry.safeParse(await request.json());\n  if (!parsed.success) {\n    return Response.json({ errors: parsed.error.flatten().fieldErrors }, { status: 400 });\n  }\n  // parsed.data is now trusted\n}"
+      },
+      "resources": [
+        { "title": "Node.js · Introduction", "url": "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs", "type": "docs" },
+        { "title": "Zod documentation", "url": "https://zod.dev/", "type": "docs" },
+        { "title": "Express · Hello world", "url": "https://expressjs.com/en/starter/hello-world.html", "type": "tutorial" }
+      ]
+    },
+    {
+      "n": 18,
+      "month": 5,
+      "title": "PostgreSQL / SQL",
+      "objective": "Ask real questions of data with SQL, and understand the answers.",
+      "areas": ["databases"],
+      "hours": [6, 8],
+      "learn": [
+        "Tables, rows, columns, types",
+        "SELECT, WHERE, ORDER BY, LIMIT",
+        "Aggregates: COUNT, SUM, AVG with GROUP BY",
+        "JOINs: inner and left, and what each one leaves out",
+        "INSERT, UPDATE, DELETE, carefully",
+        "NULL and its traps",
+        "Running Postgres locally or on a free hosted instance (Supabase, Neon)"
+      ],
+      "practice": [
+        "Complete SQLBolt lessons 1–12",
+        "Do the basic and joins sections of PostgreSQL Exercises",
+        "Write 10 questions about your expense data, then the SQL for each",
+        "Explain the difference between INNER and LEFT JOIN with a drawing"
+      ],
+      "build": {
+        "title": "Query notebook",
+        "brief": "Load a realistic dataset (your expense tracker export, or a public dataset) into Postgres and write 15 queries that answer real questions, each with the question, the SQL and the answer."
+      },
+      "prove": "Answer three new questions someone else gives you, without notes, in under 30 minutes.",
+      "masteryId": null,
+      "reflect": ["Which query gave a wrong answer that looked right?"],
+      "ship": "Query notebook (SQL file plus markdown) on GitHub.",
+      "tryFirst": {
+        "task": "Show monthly spend per category for 2026, highest first, from expenses(id, amount, category, spent_on).",
+        "hint": "Filter to the year, group by month and category, and sum. date_trunc helps with months.",
+        "explanation": "WHERE filters rows before grouping; GROUP BY collapses rows into one per group; aggregates summarise each group; ORDER BY sorts the result.",
+        "solution": "SELECT date_trunc('month', spent_on) AS month,\n       category,\n       SUM(amount) AS total\nFROM expenses\nWHERE spent_on >= '2026-01-01' AND spent_on < '2027-01-01'\nGROUP BY month, category\nORDER BY month, total DESC;"
+      },
+      "resources": [
+        { "title": "PostgreSQL · Tutorial", "url": "https://www.postgresql.org/docs/current/tutorial.html", "type": "docs" },
+        { "title": "SQLBolt", "url": "https://sqlbolt.com/", "type": "practice" },
+        { "title": "PostgreSQL Exercises", "url": "https://pgexercises.com/", "type": "practice" }
+      ]
+    },
+    {
+      "n": 19,
+      "month": 5,
+      "title": "Database design",
+      "objective": "Turn messy requirements into tables, keys and relationships that protect data integrity.",
+      "areas": ["databases"],
+      "hours": [6, 8],
+      "learn": [
+        "Entities and relationships: one-to-many, many-to-many",
+        "Primary keys and foreign keys",
+        "Normalisation: one fact in one place",
+        "Constraints: NOT NULL, UNIQUE, CHECK, foreign keys",
+        "Join tables for many-to-many relationships",
+        "Migrations: schema as versioned code",
+        "Indexes: what they speed up and what they cost"
+      ],
+      "practice": [
+        "Draw an ERD for a design studio: clients, projects, invoices, team members",
+        "Find the redundancy in a badly designed spreadsheet and normalise it",
+        "Write CREATE TABLE statements with constraints",
+        "Try to insert bad data and watch the constraints stop it"
+      ],
+      "build": {
+        "title": "Client tracker schema",
+        "brief": "Design and create the schema for a studio client tracker (clients, projects, tasks, invoices) with constraints and a migration file. Seed it with realistic sample data."
+      },
+      "prove": "Explain every key, relationship and constraint in your ERD, and one design choice you rejected.",
+      "masteryId": null,
+      "reflect": ["What did you model as a column that should have been a table, or the reverse?"],
+      "ship": "ERD image, migration SQL and seed data on GitHub.",
+      "tryFirst": {
+        "task": "Projects can have many team members, and team members work on many projects. Each assignment has a role (lead or support). Model it.",
+        "hint": "Neither the projects table nor the members table can hold this alone. The assignment itself is a thing.",
+        "explanation": "Many-to-many relationships need a join table. Its primary key is the pair of foreign keys, and extra facts about the relationship (the role) live on it.",
+        "solution": "CREATE TABLE project_members (\n  project_id uuid REFERENCES projects(id) ON DELETE CASCADE,\n  member_id  uuid REFERENCES members(id)  ON DELETE CASCADE,\n  role text NOT NULL CHECK (role IN ('lead', 'support')),\n  PRIMARY KEY (project_id, member_id)\n);"
+      },
+      "resources": [
+        { "title": "PostgreSQL · Constraints", "url": "https://www.postgresql.org/docs/current/ddl-constraints.html", "type": "docs" },
+        { "title": "Supabase · Tables and data", "url": "https://supabase.com/docs/guides/database/tables", "type": "docs" },
+        { "title": "dbdiagram.io", "url": "https://dbdiagram.io/", "type": "practice" }
+      ]
+    },
+    {
+      "n": 20,
+      "month": 5,
+      "title": "CRUD + API integration",
+      "objective": "Connect UI, API and database so records can be created, read, updated and deleted safely.",
+      "areas": ["databases", "backend"],
+      "hours": [6, 8],
+      "learn": [
+        "CRUD end to end",
+        "Parameterised queries, and why SQL built from strings is dangerous",
+        "Query builders and ORMs (Drizzle, Prisma) vs raw SQL",
+        "Transactions: all-or-nothing changes",
+        "Optimistic UI vs waiting for the server",
+        "Pagination",
+        "Soft delete vs hard delete"
+      ],
+      "practice": [
+        "Demonstrate SQL injection on a deliberately unsafe query, then fix it",
+        "Wrap 'create invoice + line items' in a transaction",
+        "Paginate a list of 200 records",
+        "Implement archive (soft delete)"
+      ],
+      "build": {
+        "title": "Client tracker app",
+        "brief": "A Next.js app on your Week 19 schema: list, create, edit and archive clients and projects, with validation, pagination and a dashboard query (revenue per client)."
+      },
+      "prove": "Mastery test: design a small relational database from requirements.",
+      "masteryId": "m08",
+      "reflect": ["Which bug only appeared once real data was involved?"],
+      "ship": "Deployed database-backed app with a README, schema diagram and seed instructions.",
+      "tryFirst": {
+        "task": "Why is this dangerous, and how do you fix it?\n\ndb.query(\"SELECT * FROM clients WHERE name = '\" + name + \"'\")",
+        "hint": "What happens if name is:  x' OR '1'='1",
+        "explanation": "Building SQL from strings lets user input become SQL code (SQL injection). Parameterised queries send the SQL and the values separately, so input is always treated as data.",
+        "solution": "// Safe: placeholders + values\nawait db.query('SELECT * FROM clients WHERE name = $1', [name]);\n\n// With a query builder (e.g. Drizzle)\nawait db.select().from(clients).where(eq(clients.name, name));"
+      },
+      "resources": [
+        { "title": "Supabase · Getting started", "url": "https://supabase.com/docs/guides/getting-started", "type": "docs" },
+        { "title": "OWASP · SQL injection prevention", "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html", "type": "docs" },
+        { "title": "Drizzle ORM · Overview", "url": "https://orm.drizzle.team/docs/overview", "type": "docs" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m08",
+      "week": 20,
+      "area": "databases",
+      "title": "Design a relational database from requirements",
+      "challenge": "Write a brief for a small business system from a real workflow you know (a print shop's orders, a tuition centre's batches), then design the database and prove it works.",
+      "constraints": [
+        "Write the requirements first, then design; don't start from a template schema",
+        "Draw the ERD on paper or a whiteboard before writing any SQL",
+        "AI may critique the final design, not produce it"
+      ],
+      "criteria": [
+        "ERD with entities, relationships and cardinality",
+        "Primary keys, foreign keys and constraints that enforce the brief's rules",
+        "Normalised: no fact stored in two places without a reason",
+        "5 queries that answer real questions from the brief",
+        "Bad data is rejected by the database, not just the UI",
+        "You can explain one alternative design and why you rejected it"
+      ],
+      "evidence": ["github", "document", "explanation"]
+    }
+  ]
+}

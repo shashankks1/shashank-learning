@@ -1,0 +1,197 @@
+{
+  "month": {
+    "n": 12,
+    "title": "Convert capability into options",
+    "theme": "Turn a year of evidence into a portfolio, a story and real opportunities, then decide the next bet.",
+    "build": "Year 1 Capability Report",
+    "mastery": "Defend your Year 1 Capability Report with evidence.",
+    "checkpoint": "Portfolio published, GitHub tidy, applications or client conversations under way, and a Year 1 report that answers what you can now build."
+  },
+  "weeks": [
+    {
+      "n": 49,
+      "month": 12,
+      "title": "Portfolio",
+      "objective": "Show increasing capability: five proofs that tell one story.",
+      "areas": ["business", "frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Portfolio as argument: design + technology + AI + product",
+        "Case study structure: problem, evidence, decisions, result",
+        "Showing your role honestly",
+        "Visual design of the portfolio itself",
+        "Writing for skimmers and for readers",
+        "Linking to live work and code",
+        "Getting critique"
+      ],
+      "practice": [
+        "Fill all five Portfolio slots in this platform",
+        "Write the capstone case study in its final form",
+        "Get critique from one product person and one engineer",
+        "Cut anything that doesn't support the story"
+      ],
+      "build": {
+        "title": "Published portfolio",
+        "brief": "A published portfolio site presenting your five capability proofs with case studies, live links and code links."
+      },
+      "prove": "A stranger can say what you can build, and how you think, after 3 minutes on the site.",
+      "masteryId": null,
+      "reflect": ["What story does your portfolio tell that your CV doesn't?"],
+      "ship": "Portfolio live.",
+      "tryFirst": {
+        "task": "Write the 3-sentence introduction for your portfolio home page.",
+        "hint": "Who you are, what you build, and the evidence. No adjectives.",
+        "explanation": "Specific claims backed by visible work beat 'passionate designer'. Name the combination that makes you rare, and point to the proof.",
+        "solution": "'I'm a product designer who builds. Over the last year I've shipped five working products, from accessible interfaces to an AI brief-extractor with evaluation, and a capstone used by 20+ local businesses. I work best where design, code and AI meet a real business problem.'"
+      },
+      "resources": [
+        { "title": "GitHub Pages documentation", "url": "https://docs.github.com/en/pages", "type": "docs" }
+      ]
+    },
+    {
+      "n": 50,
+      "month": 12,
+      "title": "GitHub and technical proof",
+      "objective": "Make your code speak for you: clean repositories, clear READMEs, visible history.",
+      "areas": ["programming"],
+      "hours": [6, 8],
+      "learn": [
+        "What reviewers look for in a GitHub profile",
+        "README structure: what, why, screenshot, how to run, architecture, learnings",
+        "The profile README",
+        "Pinning the right repositories",
+        "Commit history as evidence of process",
+        "Licences, and what to keep private",
+        "Removing secrets and personal data before publishing"
+      ],
+      "practice": [
+        "Audit every repository: keep, polish or archive",
+        "Write a profile README",
+        "Add architecture diagrams to your top 3 repositories",
+        "Scan for secrets and personal data"
+      ],
+      "build": {
+        "title": "GitHub profile as technical proof",
+        "brief": "A tidy GitHub profile: a profile README, 4–6 pinned repositories with strong READMEs, diagrams and live links, and nothing sensitive."
+      },
+      "prove": "Ask an engineer to review one repository for 10 minutes, and act on their feedback.",
+      "masteryId": null,
+      "reflect": ["Which repository are you proudest of technically, and why?"],
+      "ship": "Profile URL.",
+      "tryFirst": {
+        "task": "Write the README outline for your capstone repository.",
+        "hint": "Think about two readers: someone who wants to try it in 30 seconds, and an engineer deciding whether you can build.",
+        "explanation": "A README is the front door. Lead with what it is and a screenshot, then how to run it, then how it works and what you learned.",
+        "solution": "# Project name: one-line description\n![screenshot]\nLive: link · Case study: link\n## Why it exists (the problem in 2–3 lines)\n## Run it locally\n## How it works (diagram + stack)\n## Decisions and trade-offs (link the ADRs)\n## Testing and evaluation\n## What I'd do next"
+      },
+      "resources": [
+        { "title": "GitHub · Managing your profile README", "url": "https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme", "type": "docs" },
+        { "title": "Make a README", "url": "https://www.makeareadme.com/", "type": "article" }
+      ]
+    },
+    {
+      "n": 51,
+      "month": 12,
+      "title": "Career applications / opportunities",
+      "objective": "Turn evidence into conversations (applications, clients, opportunities) without risking the floor.",
+      "areas": ["business"],
+      "hours": [6, 8],
+      "learn": [
+        "Targeting roles that compound: design engineer, product designer who codes, AI product builder, founding designer",
+        "Tailoring applications to your evidence",
+        "Technical interviews for hybrid roles",
+        "Freelance positioning and pricing",
+        "Networking without cringe: ask for advice, show your work",
+        "Evaluating offers: pay, learning, stability, runway",
+        "Protect the floor: no resignation without a signed offer and runway"
+      ],
+      "practice": [
+        "Shortlist 15 roles or clients that match your evidence",
+        "Send 5 tailored applications or proposals",
+        "Do 2 mock interviews explaining your capstone",
+        "Log every experiment in the Career section"
+      ],
+      "build": {
+        "title": "Opportunity pipeline",
+        "brief": "At least 10 logged career experiments (applications, proposals, conversations), each with a status and what you learned, and career targets updated based on the responses."
+      },
+      "prove": "Explain your capstone in a mock technical interview, including what broke and what you'd change.",
+      "masteryId": null,
+      "reflect": ["What does the market's response say about your evidence?"],
+      "ship": "Applications sent and the pipeline tracked.",
+      "tryFirst": {
+        "task": "A job asks for 'React, TypeScript, design systems, AI features'. Write the 4-line evidence block for your application.",
+        "hint": "Map each requirement to a specific project and a link, not to adjectives.",
+        "explanation": "Hiring managers look for proof. One line per requirement, each pointing to something they can open, beats a paragraph of claims.",
+        "solution": "React + TypeScript: habit tracker and capstone, strict TS, tested core flow (link)\nDesign systems: tokens and components in Figma and in code for the capstone (link)\nAI features: brief extractor with structured output, 20-case evaluation and review flow (link)\nProduct: capstone used by 20+ businesses, 3 shipped iterations (case study link)"
+      },
+      "resources": [
+        { "title": "Tech Interview Handbook", "url": "https://www.techinterviewhandbook.org/", "type": "tutorial" },
+        { "title": "Levels.fyi (compensation data)", "url": "https://www.levels.fyi/", "type": "practice" }
+      ]
+    },
+    {
+      "n": 52,
+      "month": 12,
+      "title": "Annual review",
+      "objective": "Look at the whole year's evidence and decide the next bet deliberately.",
+      "areas": ["founder", "business"],
+      "hours": [5, 7],
+      "learn": [
+        "Reviewing evidence, not feelings",
+        "Capability compounding: what can you do now that you couldn't before?",
+        "Choosing what to deepen and what to abandon",
+        "Writing a thesis for Year 2",
+        "Financial runway and the next level of risk",
+        "Sustainable pace",
+        "Celebrating without inflating"
+      ],
+      "practice": [
+        "Generate the Year 1 Capability Report in this platform",
+        "Re-read all your weekly reviews and highlight patterns",
+        "Compare your earning power now with a year ago",
+        "Write the Year 2 thesis in one paragraph"
+      ],
+      "build": {
+        "title": "Year 1 Capability Report",
+        "brief": "Complete the Year 1 Capability Report: what you can build, explain and ship; what broke; what you learned; the opportunities you discovered; your earning power; and the Year 2 thesis."
+      },
+      "prove": "Mastery test: defend your Year 1 Capability Report with evidence.",
+      "masteryId": "m15",
+      "reflect": ["What should you bet on next, and what evidence says so?"],
+      "ship": "Capability Report exported or printed, and shared with one trusted person.",
+      "tryFirst": {
+        "task": "Write your Year 2 thesis in three sentences.",
+        "hint": "What you'll bet on, why the evidence supports it, and how you'll protect the floor while doing it.",
+        "explanation": "A thesis is a falsifiable bet: it names a direction, the evidence behind it, and the conditions under which you would change course.",
+        "solution": "'In Year 2 I'll go deep on AI product engineering for Indian SMB workflows, because my strongest evidence (capstone usage, interview pull) is there. I'll keep a stable role while running two paid experiments, and I'll only go full-time on a product after 6 months of runway and 10 paying customers.'"
+      },
+      "resources": [
+        { "title": "Paul Graham · How to do great work", "url": "https://paulgraham.com/greatwork.html", "type": "article" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m15",
+      "week": 52,
+      "area": "founder",
+      "title": "Defend your Year 1 Capability Report",
+      "challenge": "Present your Year 1 Capability Report to someone whose judgment you trust, and defend each claim with evidence.",
+      "constraints": [
+        "Every capability claim links to a build, a mastery test or a published artefact",
+        "Include failures and abandoned work",
+        "No claim without evidence"
+      ],
+      "criteria": [
+        "Answers what you can build, explain and ship now",
+        "What broke, and what you learned from it",
+        "Opportunities discovered, with the strongest one's evidence",
+        "Change in earning power, honestly assessed",
+        "What to deepen, and what to abandon",
+        "A Year 2 thesis with a plan to protect the floor"
+      ],
+      "evidence": ["document", "explanation"]
+    }
+  ]
+}

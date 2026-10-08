@@ -1,0 +1,203 @@
+{
+  "month": {
+    "n": 4,
+    "title": "Web applications + APIs",
+    "theme": "Learn the request/response model and ship a real app with a server boundary.",
+    "build": "A real full-stack web application",
+    "mastery": "Explain what happens from clicking a button to receiving data from a server.",
+    "checkpoint": "A deployed Next.js app with API routes, loading and error states, environment variables handled correctly, and no exposed secrets."
+  },
+  "weeks": [
+    {
+      "n": 13,
+      "month": 4,
+      "title": "HTTP fundamentals",
+      "objective": "Read HTTP like a language: methods, status codes, headers, bodies.",
+      "areas": ["backend"],
+      "hours": [6, 8],
+      "learn": [
+        "Client and server; request and response",
+        "Methods: GET, POST, PUT/PATCH, DELETE, and what 'safe' and 'idempotent' mean",
+        "Status codes: 2xx, 3xx, 4xx, 5xx",
+        "Headers: content-type, authorization, caching, cookies",
+        "JSON bodies",
+        "HTTPS and why it matters",
+        "CORS: what it protects, and why it blocks you"
+      ],
+      "practice": [
+        "Use curl (or Bruno/Postman) to GET and POST against a public test API",
+        "Trigger a 404, a 400 and a 500, and read each response",
+        "Inspect cookies and cache headers on a site you use daily",
+        "Explain a CORS error from your Week 8 app (or cause one on purpose)"
+      ],
+      "build": {
+        "title": "HTTP field notebook",
+        "brief": "Trace 5 real requests from sites or apps you use. For each, note the method, URL, status, key headers, body shape, timing, and what the UI did with the response. Publish it as a page in your portfolio repo."
+      },
+      "prove": "Explain GET vs POST, 401 vs 403, and 400 vs 500 to a designer friend, without jargon.",
+      "masteryId": null,
+      "reflect": ["What surprised you about how much traffic a 'simple' page makes?"],
+      "ship": "The HTTP notebook page on GitHub.",
+      "tryFirst": {
+        "task": "Your fetch to an API works in curl but fails in the browser with a CORS error. What is happening?",
+        "hint": "Think about who is enforcing the rule. curl isn't a browser.",
+        "explanation": "CORS is a browser rule: a page can only read responses from other origins if that server says it's allowed (Access-Control-Allow-Origin). curl ignores it. The fix lives on the server, or you call the API from your own server and the browser only talks to you.",
+        "solution": "Options, in order of preference:\n1. If you own the API, add the header:\n   Access-Control-Allow-Origin: https://your-site.example\n2. If you don't, call it from your own backend (an API route):\n   browser -> /api/weather (same origin) -> external API\n3. Never 'fix' it with a random public CORS proxy for real data."
+      },
+      "resources": [
+        { "title": "MDN · An overview of HTTP", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview", "type": "docs" },
+        { "title": "MDN · HTTP response status codes", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status", "type": "docs" },
+        { "title": "MDN · CORS", "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS", "type": "docs" }
+      ]
+    },
+    {
+      "n": 14,
+      "month": 4,
+      "title": "REST APIs",
+      "objective": "Design an API contract before you build it, and use other people's APIs with confidence.",
+      "areas": ["backend"],
+      "hours": [6, 8],
+      "learn": [
+        "Resources and URLs: nouns, not verbs",
+        "CRUD mapped to HTTP methods",
+        "Request validation and useful error bodies",
+        "Pagination, filtering, sorting",
+        "API documentation as a product",
+        "Idempotency and retries",
+        "Mocking an API before the backend exists"
+      ],
+      "practice": [
+        "Design the endpoints for a reading-list API on paper",
+        "Write example request/response pairs for each endpoint",
+        "Read the docs of an API you admire (GitHub, Stripe) and note 3 conventions",
+        "Build a mock with a JSON file and a tiny server"
+      ],
+      "build": {
+        "title": "Reading-list API contract + mock",
+        "brief": "Write the API contract (endpoints, inputs, outputs, errors) for a reading list, then implement it as a small Node server or Next.js route handlers with in-memory data. Test every endpoint with curl or Bruno."
+      },
+      "prove": "Hand your contract to someone (or an AI playing a frontend developer) and see if they can use it without asking questions. Fix every ambiguity.",
+      "masteryId": null,
+      "reflect": ["Which error response did you forget to design?"],
+      "ship": "API contract (markdown) and mock server on GitHub.",
+      "tryFirst": {
+        "task": "Design the endpoints for: list books, get one book, add a book, mark a book as read, delete a book.",
+        "hint": "Use one resource noun and let the HTTP method express the action. 'Mark as read' is an update to one field.",
+        "explanation": "REST uses the URL to name the thing and the method to name the action. Partial updates use PATCH. Each endpoint has a clear success code and clear error codes.",
+        "solution": "GET    /books        -> 200 [books]\nGET    /books/:id    -> 200 book | 404\nPOST   /books        -> 201 book | 400 invalid\nPATCH  /books/:id    -> 200 book | 400 | 404    body: { \"read\": true }\nDELETE /books/:id    -> 204 | 404"
+      },
+      "resources": [
+        { "title": "MDN · REST (glossary)", "url": "https://developer.mozilla.org/en-US/docs/Glossary/REST", "type": "docs" },
+        { "title": "Microsoft · Web API design best practices", "url": "https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design", "type": "article" },
+        { "title": "GitHub REST API docs (a well-designed example)", "url": "https://docs.github.com/en/rest", "type": "docs" }
+      ]
+    },
+    {
+      "n": 15,
+      "month": 4,
+      "title": "Next.js",
+      "objective": "Build a multi-page React app with routing, layouts and data loading, the way production teams do.",
+      "areas": ["frontend", "backend"],
+      "hours": [6, 8],
+      "learn": [
+        "Why a framework: routing, rendering, bundling, deployment",
+        "App Router: folders as routes, layouts, pages",
+        "Linking and navigation",
+        "Static vs dynamic rendering",
+        "Loading and error UI (loading.tsx, error.tsx)",
+        "Environment variables and what reaches the browser",
+        "Deploying to Vercel (or a similar host)"
+      ],
+      "practice": [
+        "Create a Next.js app and add 3 routes with a shared layout",
+        "Add a dynamic route /books/[id]",
+        "Add a loading state and an error boundary",
+        "Deploy the skeleton and open it on your phone"
+      ],
+      "build": {
+        "title": "Reading list in Next.js",
+        "brief": "Build the reading list UI in Next.js: list page, detail page, add form. Move your Week 14 API contract into route handlers."
+      },
+      "prove": "From a fresh clone, get the app running and deployed using only your README. Fix the README until that works.",
+      "masteryId": null,
+      "reflect": ["What does Next.js do for you that you did by hand in Weeks 5–12?"],
+      "ship": "Deployed Next.js reading list with a README.",
+      "tryFirst": {
+        "task": "Add a page at /books/[id] that shows one book, and a friendly 'not found' page if the id doesn't exist.",
+        "hint": "Dynamic route segments are folders with square brackets. Next.js has a built-in function for 'not found'.",
+        "explanation": "The folder app/books/[id]/page.tsx receives params. Fetch on the server, and call notFound() to render the not-found UI with a 404 status.",
+        "solution": "// app/books/[id]/page.tsx\nimport { notFound } from 'next/navigation';\n\nexport default async function BookPage({ params }: { params: Promise<{ id: string }> }) {\n  const { id } = await params;\n  const book = await getBook(id);\n  if (!book) notFound();\n  return <h1>{book.title}</h1>;\n}"
+      },
+      "resources": [
+        { "title": "Next.js · Learn", "url": "https://nextjs.org/learn", "type": "tutorial" },
+        { "title": "Next.js · App Router getting started", "url": "https://nextjs.org/docs/app/getting-started", "type": "docs" },
+        { "title": "Vercel · Getting started", "url": "https://vercel.com/docs/getting-started-with-vercel", "type": "docs" }
+      ]
+    },
+    {
+      "n": 16,
+      "month": 4,
+      "title": "Server/client architecture",
+      "objective": "Know exactly what runs on the server, what runs in the browser, and what crosses the boundary.",
+      "areas": ["backend", "frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Server Components vs Client Components",
+        "'use client' and what it means",
+        "Server Actions and route handlers",
+        "Secrets stay on the server",
+        "Calling third-party APIs from the server",
+        "Caching and revalidation basics",
+        "Logs: where server errors show up"
+      ],
+      "practice": [
+        "Mark which components in your app must be client components, and why",
+        "Move an API call that needs a key into a server route",
+        "Check in the browser's Network and Sources panels that the key never appears",
+        "Find your server logs on your host"
+      ],
+      "build": {
+        "title": "Reading list + server-side enrichment",
+        "brief": "Add a server route that looks up book metadata (for example from the Open Library API) and normalises it before the client sees it. Handle the external API failing."
+      },
+      "prove": "Mastery test: explain what happens from clicking a button to receiving data from a server.",
+      "masteryId": "m07",
+      "reflect": ["Draw the boundary: which line in your code is the last one that runs on the server?"],
+      "ship": "Deployed full-stack reading list with a request-flow diagram in the README.",
+      "tryFirst": {
+        "task": "A client component needs data from an API that requires a secret key. How do you get the data to the component without exposing the key?",
+        "hint": "The browser can only call things it can see. What could you create that the browser can call, but which holds the key itself?",
+        "explanation": "Create a route handler (or server action) that reads the key from a server-only environment variable, calls the external API, and returns only the data the UI needs. The browser talks to your route; the key never leaves the server.",
+        "solution": "// app/api/books/route.ts  (runs on the server only)\nexport async function GET(request: Request) {\n  const q = new URL(request.url).searchParams.get('q') ?? '';\n  const res = await fetch(`https://api.example.com/search?q=${encodeURIComponent(q)}`, {\n    headers: { Authorization: `Bearer ${process.env.BOOKS_API_KEY}` },\n  });\n  if (!res.ok) return Response.json({ error: 'Lookup failed' }, { status: 502 });\n  const data = await res.json();\n  return Response.json(data.items.map((b: { id: string; title: string }) => ({ id: b.id, title: b.title })));\n}"
+      },
+      "resources": [
+        { "title": "Next.js · Server and Client Components", "url": "https://nextjs.org/docs/app/getting-started/server-and-client-components", "type": "docs" },
+        { "title": "React · Server Components", "url": "https://react.dev/reference/rsc/server-components", "type": "docs" },
+        { "title": "Open Library · Developer APIs", "url": "https://openlibrary.org/developers/api", "type": "docs" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m07",
+      "week": 16,
+      "area": "backend",
+      "title": "From click to data",
+      "challenge": "Using your deployed full-stack app, explain what happens from the moment a user clicks a button to the moment new data appears, and prove each step with evidence.",
+      "constraints": [
+        "Explain from memory first, then verify with DevTools and server logs",
+        "Use your own app, not a generic example",
+        "10 minutes or less recorded, or 800 words or less plus a diagram"
+      ],
+      "criteria": [
+        "Covers event, state, request, network, server route, external call or data, response, and re-render",
+        "Shows the actual request in the Network panel (method, status, payload)",
+        "Shows where the server logged the request",
+        "Explains where secrets live and proves they don't reach the browser",
+        "Explains one failure path and what the user sees",
+        "Includes a diagram you drew yourself"
+      ],
+      "evidence": ["github", "live", "explanation"]
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "month": {
+    "n": 11,
+    "title": "Capstone",
+    "theme": "Turn a validated problem into a product slice real people use, and tell the honest story of building it.",
+    "build": "A real product-shaped capstone",
+    "mastery": "Ship the capstone and present it with evidence of real use.",
+    "checkpoint": "A deployed product slice with real users, feedback, at least one iteration, and complete documentation."
+  },
+  "weeks": [
+    {
+      "n": 41,
+      "month": 11,
+      "title": "Opportunity selection",
+      "objective": "Choose the capstone problem with evidence, and a scope you can actually ship in 7 weeks.",
+      "areas": ["product", "founder"],
+      "hours": [6, 8],
+      "learn": [
+        "Choosing between opportunities using your Lab dimensions",
+        "Fit with your skills and your access to users",
+        "Scope: one user, one job, one outcome",
+        "Risk: what could kill the project",
+        "Kill criteria",
+        "Saying no to good ideas",
+        "Capstone vs startup: what this is and what it isn't"
+      ],
+      "practice": [
+        "Compare your top 3 opportunities dimension by dimension",
+        "Write a one-line capstone thesis for each",
+        "List kill criteria for the winner",
+        "Ask one sceptic to poke holes in it"
+      ],
+      "build": {
+        "title": "Capstone decision memo",
+        "brief": "A one-page memo: the chosen opportunity and why (evidence), why not the others, the target user, the one job, the success measure, and the kill criteria."
+      },
+      "prove": "Present the memo to someone and survive their three hardest questions.",
+      "masteryId": null,
+      "reflect": ["What are you choosing not to build?"],
+      "ship": "Decision memo in the capstone repository.",
+      "tryFirst": {
+        "task": "You have three opportunities: high market potential but no access to users; medium potential with 5 interviewees eager to try it; low potential but technically fun. Which do you pick for a 7-week capstone, and why?",
+        "hint": "What does a 7-week capstone need most: a big market, or real users who will use it next month?",
+        "explanation": "For a capstone, access to real users and a shippable scope beat theoretical size. You learn more from 5 real users of a small thing than from zero users of a big idea. Size matters later.",
+        "solution": "Pick the medium-potential opportunity with 5 eager users.\nReasoning: a real feedback loop within weeks, evidence that compounds, and a scope that can stay tight.\nKeep the high-potential one in the Lab and look for a path to its users.\nDrop the fun one, or do it as a weekend side project."
+      },
+      "resources": [
+        { "title": "Basecamp · Shape Up (free book)", "url": "https://basecamp.com/shapeup", "type": "book" },
+        { "title": "Paul Graham · How to get startup ideas", "url": "https://paulgraham.com/startupideas.html", "type": "article" }
+      ]
+    },
+    {
+      "n": 42,
+      "month": 11,
+      "title": "Product definition",
+      "objective": "Define exactly what you'll build: the user, the job, the flow and the boundaries.",
+      "areas": ["product"],
+      "hours": [6, 8],
+      "learn": [
+        "Jobs to be done",
+        "User stories and acceptance criteria",
+        "Appetite and scope (Shape Up)",
+        "Success metrics and guardrails",
+        "Out-of-scope lists",
+        "Writing a lean PRD",
+        "Risks and assumptions"
+      ],
+      "practice": [
+        "Write the PRD on one page",
+        "Write acceptance criteria for the core flow",
+        "Cut the scope by a third",
+        "Define one success metric and one guardrail"
+      ],
+      "build": {
+        "title": "Capstone PRD",
+        "brief": "A one-page PRD: problem, user, job, core flow, acceptance criteria, out of scope, success metric, risks."
+      },
+      "prove": "Someone else reads the PRD and describes the product back to you correctly in two minutes.",
+      "masteryId": null,
+      "reflect": ["What did you cut that still hurts?"],
+      "ship": "PRD in the repository.",
+      "tryFirst": {
+        "task": "Write acceptance criteria for: 'A bakery owner can get a ready-to-post festival image.'",
+        "hint": "Use Given / When / Then. Make it concrete and checkable, including what happens when something is missing.",
+        "explanation": "Acceptance criteria turn a vague story into a testable contract. They cover the happy path and the most important edge cases, written so anyone can check pass or fail.",
+        "solution": "Given a signed-in owner with a shop name and logo\nWhen they pick an upcoming festival\nThen they see 3 post options with their shop name within 10 seconds\nAnd they can download one as a 1080×1080 image\n\nGiven no logo has been uploaded\nThen the posts use the shop name only, and a prompt suggests adding a logo"
+      },
+      "resources": [
+        { "title": "Basecamp · Shape Up (free book)", "url": "https://basecamp.com/shapeup", "type": "book" },
+        { "title": "Atlassian · User stories", "url": "https://www.atlassian.com/agile/project-management/user-stories", "type": "article" }
+      ]
+    },
+    {
+      "n": 43,
+      "month": 11,
+      "title": "Prototype",
+      "objective": "Test the experience before building the system: fast, cheap, and with real users.",
+      "areas": ["product", "frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Fidelity: paper, clickable and coded prototypes",
+        "Prototyping the riskiest part first",
+        "Usability testing: tasks, thinking aloud, observation",
+        "Wizard of Oz: fake the backend to test the value",
+        "Measuring task success",
+        "Design system basics for speed",
+        "Iterating between sessions"
+      ],
+      "practice": [
+        "Prototype the core flow in Figma",
+        "Run 3 usability tests with real target users",
+        "Fake one 'AI' step by doing it by hand",
+        "Fix the top 3 issues between sessions"
+      ],
+      "build": {
+        "title": "Tested prototype",
+        "brief": "A clickable (or coded) prototype of the core flow, tested with at least 3 target users, with the findings and changes logged."
+      },
+      "prove": "Show the before and after of your three biggest changes, each tied to an observed user moment.",
+      "masteryId": null,
+      "reflect": ["Which part of your design did users ignore completely?"],
+      "ship": "Prototype link plus test notes.",
+      "tryFirst": {
+        "task": "Write a 3-task usability test script for your capstone prototype.",
+        "hint": "Tasks are goals in the user's language, not instructions ('click the button'). Observe; don't help.",
+        "explanation": "Good test tasks reflect real goals, don't reveal UI labels, and have a clear success state you can observe. Ask people to think aloud, and resist rescuing them.",
+        "solution": "Intro: 'We're testing the design, not you. Please think aloud.'\nTask 1: 'Diwali is next week. Get a post ready for your shop's WhatsApp status.'\nTask 2: 'You don't like the colours. Make it feel more like your shop.'\nTask 3: 'Find the post you made earlier and share it again.'\nFor each task: success? time taken? where did they hesitate? any quotes?"
+      },
+      "resources": [
+        { "title": "NN/g · Usability testing 101", "url": "https://www.nngroup.com/articles/usability-testing-101/", "type": "article" },
+        { "title": "NN/g · Thinking aloud", "url": "https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/", "type": "article" }
+      ]
+    },
+    {
+      "n": 44,
+      "month": 11,
+      "title": "Technical architecture",
+      "objective": "Choose the simplest architecture that supports the product, and write down why.",
+      "areas": ["backend", "programming"],
+      "hours": [6, 8],
+      "learn": [
+        "Architecture as decisions: what, why, and the trade-offs",
+        "Choosing a stack you can ship with",
+        "The data model for the capstone",
+        "Where AI or automation fits, and where it doesn't",
+        "Hosting, environments and running costs",
+        "Architecture decision records (ADRs)",
+        "Observability from day one"
+      ],
+      "practice": [
+        "Draw the system diagram",
+        "Write 3 ADRs (stack, data, AI usage)",
+        "Estimate monthly running cost at 10 and at 1,000 users",
+        "Build a spike of the riskiest technical piece"
+      ],
+      "build": {
+        "title": "Architecture doc + spike",
+        "brief": "A system diagram, data model, 3 ADRs, a cost estimate, and a working spike of the riskiest technical part."
+      },
+      "prove": "Explain your architecture to a developer and defend two trade-offs.",
+      "masteryId": null,
+      "reflect": ["Which technology did you choose because it was exciting rather than necessary?"],
+      "ship": "ARCHITECTURE.md, ADRs and the spike in the repository.",
+      "tryFirst": {
+        "task": "Write an ADR for: 'Do we need a separate vector database for the capstone's search?'",
+        "hint": "Context, decision, consequences. Consider the size of the data and what Postgres can already do.",
+        "explanation": "An ADR records a decision with its context, so future you knows why it was made. For small datasets Postgres (full-text search plus pgvector) is usually enough; a separate vector database adds cost and moving parts.",
+        "solution": "# ADR 003: No separate vector database\nStatus: accepted\nContext: ~2,000 documents; Postgres already hosts the app data.\nDecision: use Postgres full-text search + pgvector in the same database.\nConsequences: + one system to run; + joins with app data; - revisit above ~1M vectors or if search latency exceeds 300 ms."
+      },
+      "resources": [
+        { "title": "Architecture decision records", "url": "https://adr.github.io/", "type": "docs" },
+        { "title": "The C4 model for software architecture", "url": "https://c4model.com/", "type": "docs" }
+      ]
+    },
+    {
+      "n": 45,
+      "month": 11,
+      "title": "Build",
+      "objective": "Build the core flow end to end: working, deployed and instrumented.",
+      "areas": ["frontend", "backend"],
+      "hours": [7, 9],
+      "learn": [
+        "Build order: walking skeleton first",
+        "Vertical slices over horizontal layers",
+        "Feature flags and safe deploys",
+        "Instrumentation: tracking key events",
+        "Working with AI coding tools without losing ownership",
+        "Shipping something every session",
+        "Cutting scope under time pressure"
+      ],
+      "practice": [
+        "Deploy a walking skeleton on day one",
+        "Ship one vertical slice per session",
+        "Add analytics events for each step of the core flow",
+        "Log every AI-assisted change and whether you can explain it"
+      ],
+      "build": {
+        "title": "Capstone core flow",
+        "brief": "The core flow working end to end in production: real data paths, auth (if needed), error states and analytics events."
+      },
+      "prove": "A new user completes the core flow on their own phone without help.",
+      "masteryId": null,
+      "reflect": ["Where did AI speed you up, and where did it cost you understanding?"],
+      "ship": "Deployed capstone v0.1.",
+      "tryFirst": {
+        "task": "Plan the build order for a capstone with sign-in, create post, AI caption, download and history. You have 5 sessions.",
+        "hint": "What's the thinnest thing that goes from start to finish and is deployed? Build that first, then thicken it.",
+        "explanation": "A walking skeleton proves the whole path works early (deployment, database, auth) and surfaces integration problems while there's still time to fix them. Then add slices in order of value and risk.",
+        "solution": "Session 1: deployed skeleton: sign-in -> create post (no AI) -> download. Real database, real host.\nSession 2: AI caption behind an adapter, with fallback text.\nSession 3: history list.\nSession 4: error states, empty states, analytics events.\nSession 5: polish the core flow; cut anything unfinished."
+      },
+      "resources": [
+        { "title": "Walking skeleton (C2 wiki)", "url": "https://wiki.c2.com/?WalkingSkeleton", "type": "article" },
+        { "title": "PostHog documentation", "url": "https://posthog.com/docs", "type": "docs" }
+      ]
+    },
+    {
+      "n": 46,
+      "month": 11,
+      "title": "Testing + iteration",
+      "objective": "Find what breaks and what confuses people, then fix what matters most.",
+      "areas": ["product", "programming"],
+      "hours": [7, 9],
+      "learn": [
+        "The testing pyramid: unit, integration, end-to-end",
+        "A few high-value tests (Playwright for the core flow)",
+        "Accessibility testing",
+        "Bug triage: severity × frequency",
+        "Feedback loops with real users",
+        "Iterating on evidence, not opinion",
+        "Regression: keeping fixed things fixed"
+      ],
+      "practice": [
+        "Write one end-to-end test for the core flow",
+        "Run an accessibility audit and fix the top issues",
+        "Collect feedback from at least 5 users",
+        "Triage everything into fix now / later / never"
+      ],
+      "build": {
+        "title": "Capstone v0.2",
+        "brief": "An iteration based on real user feedback: top issues fixed, an end-to-end test on the core flow, an accessibility pass, and a changelog."
+      },
+      "prove": "Show three changes, each traced from user evidence to fix to result.",
+      "masteryId": null,
+      "reflect": ["Which feedback did you choose to ignore, and why?"],
+      "ship": "Capstone v0.2 deployed, with a CHANGELOG.",
+      "tryFirst": {
+        "task": "Write an end-to-end test that checks a user can create and download a post.",
+        "hint": "Script what a person would do: visit, act, and check what they should see. Find elements by role and label, not CSS classes.",
+        "explanation": "An end-to-end test protects the flow that matters most. Selecting elements by role and label mirrors how users (and screen readers) find things, so the test only breaks for real reasons.",
+        "solution": "import { test, expect } from '@playwright/test';\n\ntest('create and download a post', async ({ page }) => {\n  await page.goto('/');\n  await page.getByRole('button', { name: 'New post' }).click();\n  await page.getByLabel('Festival').selectOption('Diwali');\n  await page.getByRole('button', { name: 'Generate' }).click();\n  await expect(page.getByRole('img', { name: /diwali post/i })).toBeVisible();\n  const download = page.waitForEvent('download');\n  await page.getByRole('button', { name: 'Download' }).click();\n  expect((await download).suggestedFilename()).toMatch(/\\.png$/);\n});"
+      },
+      "resources": [
+        { "title": "Playwright · Getting started", "url": "https://playwright.dev/docs/intro", "type": "docs" },
+        { "title": "web.dev · Learn Accessibility", "url": "https://web.dev/learn/accessibility", "type": "tutorial" }
+      ]
+    },
+    {
+      "n": 47,
+      "month": 11,
+      "title": "Launch",
+      "objective": "Put the product in front of the people it's for: deliberately, measurably and safely.",
+      "areas": ["product", "business"],
+      "hours": [7, 9],
+      "learn": [
+        "Launch as a process, not an event",
+        "Launch checklist: privacy note, support, monitoring",
+        "Writing the launch message for a specific audience",
+        "Channels: communities, direct outreach, content",
+        "Onboarding the first users personally",
+        "Measuring activation",
+        "Handling the first bugs in public"
+      ],
+      "practice": [
+        "Write a launch checklist and complete it",
+        "Draft launch messages for 2 channels",
+        "Personally onboard 3 users",
+        "Watch the analytics on launch day"
+      ],
+      "build": {
+        "title": "Launch",
+        "brief": "Launch the capstone to a defined audience (reach at least 20 target users), with a privacy note, a support channel, monitoring and an activation metric."
+      },
+      "prove": "Report reach, sign-ups and activation numbers honestly, whatever they are.",
+      "masteryId": null,
+      "reflect": ["What did launching feel like, and what did it teach you about distribution?"],
+      "ship": "Live product plus the launch post or message.",
+      "tryFirst": {
+        "task": "Write the launch message for your capstone for a WhatsApp group of local business owners.",
+        "hint": "Lead with their problem in their words. Keep it specific and short, with one clear action and no hype.",
+        "explanation": "People respond to their own problem described precisely, plus a low-effort next step. Hype and feature lists get ignored.",
+        "solution": "'Diwali is 10 days away. If making shop posts takes you hours (or doesn't happen at all), I've built a small free tool: pick the festival, get 3 ready posts with your shop name, and share them on WhatsApp in 2 minutes. I'm looking for 10 shops to try it this week. Reply \"Diwali\" and I'll set you up personally.'"
+      },
+      "resources": [
+        { "title": "Paul Graham · Do things that don't scale", "url": "https://paulgraham.com/ds.html", "type": "article" }
+      ]
+    },
+    {
+      "n": 48,
+      "month": 11,
+      "title": "Measure + improve",
+      "objective": "Read what users actually did, decide what to change, and close the loop.",
+      "areas": ["product", "founder"],
+      "hours": [7, 9],
+      "learn": [
+        "Activation, retention and engagement metrics",
+        "Cohorts at a small scale",
+        "Qualitative and quantitative evidence together",
+        "Deciding: double down, change course, or stop",
+        "Writing a case study",
+        "Documentation for users and for developers",
+        "Telling the honest story"
+      ],
+      "practice": [
+        "Pull your metrics for the first week after launch",
+        "Interview 3 users who churned or never activated",
+        "Ship one improvement and measure it",
+        "Write the README and user documentation"
+      ],
+      "build": {
+        "title": "Capstone v1 + case study",
+        "brief": "Ship one evidence-based improvement, measure it, and write the capstone case study: problem, evidence, decisions, build, results, what failed, what's next."
+      },
+      "prove": "Mastery test: ship the capstone and present it with evidence of real use.",
+      "masteryId": "m14",
+      "reflect": ["Is this something you'd keep working on? What does the evidence say?"],
+      "ship": "Capstone case study published and documentation complete.",
+      "tryFirst": {
+        "task": "40 people signed up, 12 completed the core flow once, and 3 came back the next week. What do you investigate first?",
+        "hint": "Where is the biggest drop, and do you know why it happens? Numbers tell you where; people tell you why.",
+        "explanation": "The largest drop (sign-up to first use: 70% lost) is usually the most valuable to fix. Talk to the people who dropped before changing anything, then change one thing and measure again.",
+        "solution": "Funnel: 40 -> 12 (30% activation) -> 3 (25% week-2 retention)\n1. Biggest leak: sign-up to first use. Watch 3 new users try it; call 3 who dropped.\n2. Example hypothesis: 'the logo upload step blocks people'. Make it optional.\n3. Measure activation for the next 20 sign-ups.\n4. Only then look at retention."
+      },
+      "resources": [
+        { "title": "PostHog · Product analytics", "url": "https://posthog.com/docs/product-analytics", "type": "docs" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m14",
+      "week": 48,
+      "area": "product",
+      "title": "Ship the capstone",
+      "challenge": "Present your capstone as a real product: the problem, the evidence, what you built, who used it, what happened, and what you learned.",
+      "constraints": [
+        "Deployed and usable by people other than you",
+        "At least 5 real users; friends only count if they genuinely have the problem",
+        "Honest numbers, including the bad ones"
+      ],
+      "criteria": [
+        "A real problem and target user, backed by your Opportunity Lab evidence",
+        "A product hypothesis stated before launch and evaluated after",
+        "UX designed and tested with users",
+        "Technical architecture documented (diagram + ADRs)",
+        "Implemented, deployed and monitored",
+        "Feedback collected, with at least one iteration shipped and measured",
+        "Documentation: README, user guide, case study"
+      ],
+      "evidence": ["github", "live", "document", "explanation"]
+    }
+  ]
+}

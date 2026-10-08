@@ -1,0 +1,205 @@
+{
+  "month": {
+    "n": 2,
+    "title": "Programming fundamentals",
+    "theme": "Move from copying code to decomposing problems and debugging deliberately.",
+    "build": "Interactive application",
+    "mastery": "Build a small application without following a tutorial step-by-step.",
+    "checkpoint": "An interactive app that fetches real data, with loading and error states, a README, and one documented bug hunt."
+  },
+  "weeks": [
+    {
+      "n": 5,
+      "month": 2,
+      "title": "JavaScript fundamentals",
+      "objective": "Write small programs that take input, make decisions and produce output, and read error messages without panic.",
+      "areas": ["programming", "frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Values and types: string, number, boolean, null, undefined",
+        "Variables: const vs let, and why var is avoided",
+        "Operators and comparisons (=== vs ==)",
+        "Conditionals: if/else, the ternary operator, truthy and falsy",
+        "Loops: for, for…of, while",
+        "Functions: parameters, return values, scope",
+        "Reading errors in the console: message, file, line"
+      ],
+      "practice": [
+        "Write a function that converts a design spec in px to rem",
+        "Write FizzBuzz, then explain it line by line",
+        "Write a function that returns a greeting based on the hour of the day",
+        "Break your code on purpose in 3 ways and read each error message out loud"
+      ],
+      "build": {
+        "title": "Tip & split calculator",
+        "brief": "A small page where you enter a bill, a tip percentage and the number of people, and see each person's share. Handle empty and invalid input gracefully."
+      },
+      "prove": "Explain every line of your calculator to a rubber duck or a voice memo: what runs, in what order, and what each value is at each step.",
+      "masteryId": null,
+      "reflect": ["Which error message confused you most, and what did it actually mean?"],
+      "ship": "Calculator committed with a README and deployed alongside your Week 4 site.",
+      "tryFirst": {
+        "task": "Write a function splitBill(total, tipPercent, people) that returns each person's share rounded to 2 decimals.",
+        "hint": "Break it into steps: tip amount, grand total, per-person share, rounding. What should happen if people is 0?",
+        "explanation": "Good functions do one job and guard their inputs. Guard clauses at the top handle bad input before the main logic. Rounding via cents keeps the result a number (toFixed would return a string).",
+        "solution": "function splitBill(total, tipPercent, people) {\n  if (people <= 0 || total < 0) return null;\n  const grandTotal = total * (1 + tipPercent / 100);\n  return Math.round((grandTotal / people) * 100) / 100;\n}\n\nsplitBill(1200, 10, 4); // 330"
+      },
+      "resources": [
+        { "title": "javascript.info · The Modern JavaScript Tutorial", "url": "https://javascript.info/", "type": "tutorial" },
+        { "title": "MDN · JavaScript Guide", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide", "type": "docs" },
+        { "title": "Eloquent JavaScript (free book)", "url": "https://eloquentjavascript.net/", "type": "book" }
+      ]
+    },
+    {
+      "n": 6,
+      "month": 2,
+      "title": "Variables, data structures and functions",
+      "objective": "Model real things as data (arrays of objects) and write functions that transform that data.",
+      "areas": ["programming"],
+      "hours": [6, 8],
+      "learn": [
+        "Arrays: index, length, push, slice, includes",
+        "Objects: properties, nesting, destructuring",
+        "Arrays of objects: the shape of most app data",
+        "map, filter, find, reduce: transform instead of loop-and-mutate",
+        "Immutability: why you copy instead of change",
+        "Functions as values: callbacks and arrow functions",
+        "JSON: data as text"
+      ],
+      "practice": [
+        "Represent 5 of your design projects as an array of objects (title, year, tools, client)",
+        "Write filterByTool(projects, tool) and sortByYear(projects)",
+        "Use reduce to count projects per year",
+        "Convert the array to JSON and back"
+      ],
+      "build": {
+        "title": "Contact list",
+        "brief": "A contact list app: add a contact (name, phone, tag), search by name, filter by tag, delete. Data lives in an array of objects, and every operation is a small named function."
+      },
+      "prove": "Change a requirement without starting over: add a 'favourite' flag and a 'favourites first' sort. Note how many functions you had to touch.",
+      "masteryId": null,
+      "reflect": ["Where did you mutate data you should have copied?"],
+      "ship": "Contact list on GitHub with a README that shows your data shape.",
+      "tryFirst": {
+        "task": "Given contacts = [{ name, tag }], return a new array of only the 'client' contacts, sorted by name, without changing the original array.",
+        "hint": "filter decides who stays. sort changes the array in place, so copy first (or use toSorted). localeCompare compares strings properly.",
+        "explanation": "filter returns a new array; toSorted (or [...array].sort) avoids mutating the original. Chaining small transformations reads like a sentence: keep the clients, sort them by name.",
+        "solution": "const clients = contacts\n  .filter(contact => contact.tag === 'client')\n  .toSorted((a, b) => a.name.localeCompare(b.name));"
+      },
+      "resources": [
+        { "title": "MDN · Array", "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array", "type": "docs" },
+        { "title": "javascript.info · Data types", "url": "https://javascript.info/data-types", "type": "tutorial" },
+        { "title": "Exercism · JavaScript track", "url": "https://exercism.org/tracks/javascript", "type": "practice" }
+      ]
+    },
+    {
+      "n": 7,
+      "month": 2,
+      "title": "DOM, events and interaction",
+      "objective": "Connect data to the screen: render from state, react to events, and persist between visits.",
+      "areas": ["frontend", "programming"],
+      "hours": [6, 8],
+      "learn": [
+        "The DOM as a tree you can query and change",
+        "querySelector, createElement, textContent vs innerHTML (and why innerHTML with user input is dangerous)",
+        "Events: click, input, submit, keydown; event.preventDefault",
+        "Event delegation for lists",
+        "The render-from-state pattern: data changes, then the screen re-renders",
+        "localStorage: saving and loading JSON",
+        "Form handling and validation in the browser"
+      ],
+      "practice": [
+        "Render your projects array into cards with createElement",
+        "Add a live search that filters the cards as you type",
+        "Use event delegation to delete a card from a list",
+        "Persist a counter in localStorage so it survives a refresh"
+      ],
+      "build": {
+        "title": "Personal expense tracker",
+        "brief": "Add expenses (amount, category, date), see a running total and per-category totals, delete entries, and keep everything after a refresh. Render everything from one state array."
+      },
+      "prove": "Keyboard-only test: add, filter and delete an expense without touching the mouse. Fix whatever blocks you.",
+      "masteryId": null,
+      "reflect": ["Where did your screen and your data get out of sync, and why?"],
+      "ship": "Expense tracker deployed, with an empty state, an error for invalid amounts, and a README.",
+      "tryFirst": {
+        "task": "Clicking 'Delete' on any expense in a list should remove that expense, using a single event listener for the whole list.",
+        "hint": "Listen on the list, not on each button. The event knows which element was clicked (event.target). Put the expense id on the button as a data attribute.",
+        "explanation": "Event delegation: one listener on a parent handles events from many children, including ones added later. closest() walks up to the element you care about, and data attributes carry the id back to your state.",
+        "solution": "list.addEventListener('click', event => {\n  const button = event.target.closest('[data-delete-id]');\n  if (!button) return;\n  expenses = expenses.filter(e => e.id !== button.dataset.deleteId);\n  save();\n  render();\n});"
+      },
+      "resources": [
+        { "title": "MDN · Introduction to the DOM", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction", "type": "docs" },
+        { "title": "javascript.info · Document", "url": "https://javascript.info/document", "type": "tutorial" },
+        { "title": "MDN · Using the Web Storage API", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API", "type": "docs" }
+      ]
+    },
+    {
+      "n": 8,
+      "month": 2,
+      "title": "Async JavaScript, APIs and debugging",
+      "objective": "Fetch real data, handle every state it can be in, and debug systematically instead of guessing.",
+      "areas": ["programming", "frontend"],
+      "hours": [6, 8],
+      "learn": [
+        "Synchronous vs asynchronous code: why the page doesn't freeze",
+        "Promises and async/await",
+        "fetch: request, response, response.ok, JSON parsing",
+        "Loading, success, empty and error states",
+        "Error handling with try/catch",
+        "API keys: why they never belong in browser code",
+        "Debugging: breakpoints, the Network panel, console.table"
+      ],
+      "practice": [
+        "Fetch a list from a public API (for example Open-Meteo) and log it",
+        "Show a loading message, then the data, then an error state when you go offline",
+        "Set a breakpoint inside your fetch handler and inspect the response",
+        "Write down your debugging steps for one real bug"
+      ],
+      "build": {
+        "title": "Weather dashboard",
+        "brief": "Search a city and show current conditions plus a 5-day forecast from a free, keyless API (Open-Meteo). Design every state: idle, loading, success, not found, network error."
+      },
+      "prove": "Mastery test: build an API-powered application without tutorial guidance.",
+      "masteryId": "m05",
+      "reflect": ["What did you learn from the bug that took longest to fix?"],
+      "ship": "GitHub repository plus a README with screenshots of every state.",
+      "tryFirst": {
+        "task": "Fetch weather for given coordinates and show 'Could not load weather' if anything fails, including a non-200 response.",
+        "hint": "fetch only rejects on network failure. A 404 or 500 still 'succeeds', so check response.ok yourself.",
+        "explanation": "Wrap the request in try/catch, throw when !response.ok, and keep the UI states explicit. Always end in a state the user can see, never a silent failure.",
+        "solution": "async function loadWeather(lat, lon) {\n  setState('loading');\n  try {\n    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m`;\n    const response = await fetch(url);\n    if (!response.ok) throw new Error(`HTTP ${response.status}`);\n    const data = await response.json();\n    setState('success', data.current);\n  } catch (error) {\n    console.error(error);\n    setState('error', 'Could not load weather');\n  }\n}"
+      },
+      "resources": [
+        { "title": "MDN · Asynchronous JavaScript", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS", "type": "tutorial" },
+        { "title": "MDN · Using the Fetch API", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch", "type": "docs" },
+        { "title": "Open-Meteo API docs", "url": "https://open-meteo.com/en/docs", "type": "docs" },
+        { "title": "Chrome DevTools · Debug JavaScript", "url": "https://developer.chrome.com/docs/devtools/javascript", "type": "docs" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m05",
+      "week": 8,
+      "area": "programming",
+      "title": "Build an API-powered app without a tutorial",
+      "challenge": "Build a small app that fetches data from a public API you haven't used before and lets the user search or filter it.",
+      "constraints": [
+        "No step-by-step tutorial; official API docs and MDN are allowed",
+        "If you use AI, only to explain errors, not to write the app",
+        "Plain JavaScript (no framework)",
+        "Time-box: one weekend"
+      ],
+      "criteria": [
+        "Fetches real data and renders it from state",
+        "Loading, empty, error and success states are each visible",
+        "User input is validated and never inserted with innerHTML",
+        "No API keys in browser code",
+        "README explains the data flow and one bug you fixed",
+        "You can change one requirement live without starting over"
+      ],
+      "evidence": ["github", "live", "explanation"]
+    }
+  ]
+}

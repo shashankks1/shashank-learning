@@ -1,0 +1,33 @@
+{
+  "version": "2026.10-v2",
+  "principles": [
+    "Build > consume",
+    "Understand > memorize",
+    "Debug > avoid mistakes",
+    "Ship > polish endlessly",
+    "Evidence > confidence",
+    "Systems > tools",
+    "Problems > technology",
+    "Distribution matters",
+    "AI is leverage, not the product by default",
+    "Learn concepts that survive tool changes"
+  ],
+  "capabilityAreas": [
+    { "id": "programming", "label": "Programming", "description": "Decomposing problems, data structures, functions, debugging, version control." },
+    { "id": "frontend", "label": "Frontend", "description": "HTML, CSS, JavaScript in the browser, React, TypeScript, accessible interfaces." },
+    { "id": "backend", "label": "Backend", "description": "HTTP, APIs, servers, auth, security and reliability." },
+    { "id": "databases", "label": "Databases", "description": "Relational modelling, SQL, persistence, data integrity." },
+    { "id": "ai", "label": "AI Engineering", "description": "Model APIs, structured output, retrieval, evaluation, AI product UX." },
+    { "id": "automation", "label": "Automation", "description": "Workflows, webhooks, tool calling, failure handling." },
+    { "id": "product", "label": "Product", "description": "Discovery, research, scoping, shipping, measuring." },
+    { "id": "business", "label": "Business", "description": "Sizing, pricing, distribution, career leverage." },
+    { "id": "founder", "label": "Founder Skills", "description": "Finding problems worth solving, judgment under uncertainty, end-to-end ownership." }
+  ],
+  "portfolioSlots": [
+    { "slot": 1, "theme": "Frontend craft", "intent": "A responsive, accessible interface where design quality and code quality are both visible." },
+    { "slot": 2, "theme": "Interactive application", "intent": "Real state, real interaction, real data from an API. Shows you can program, not just lay out." },
+    { "slot": 3, "theme": "Full-stack application", "intent": "Server, database, auth and deployment. Shows you understand the whole request path." },
+    { "slot": 4, "theme": "AI-powered product", "intent": "A model in service of a user job, with structured output, evaluation and human control." },
+    { "slot": 5, "theme": "Product-shaped capstone", "intent": "A real problem, real users, a shipped product slice, and an honest account of what happened." }
+  ]
+}

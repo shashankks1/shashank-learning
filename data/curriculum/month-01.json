@@ -1,0 +1,265 @@
+{
+  "month": {
+    "n": 1,
+    "title": "Start small, build the habit",
+    "theme": "Set up a safe practice loop: HTML, CSS, Git, and a first useful page.",
+    "build": "A complete, responsive, deployed webpage",
+    "mastery": "Semantic page without a tutorial · recreate a design in HTML/CSS · recover a broken branch · explain the browser",
+    "checkpoint": "A live page, a clean repo with real commits, four weekly reviews. Can you change the page without a tutorial, and explain what the browser is doing?"
+  },
+  "weeks": [
+    {
+      "n": 1,
+      "month": 1,
+      "title": "HTML foundations",
+      "objective": "Write a semantic HTML page from a blank file and know why every element is there.",
+      "areas": ["frontend"],
+      "hours": [5, 7],
+      "learn": [
+        "How a browser turns an HTML file into a page (the DOM tree)",
+        "Document structure: doctype, html, head, body, meta viewport",
+        "Semantic landmarks: header, nav, main, section, article, footer",
+        "Headings as an outline; paragraphs, lists, links, images with alt text",
+        "Forms: label, input types, button, accessible names",
+        "Your workshop: editor, browser DevTools Elements panel, file and folder hygiene"
+      ],
+      "practice": [
+        "Mark up a recipe from a cookbook photo using only semantic elements",
+        "Open 3 sites you admire in DevTools and sketch their landmark structure",
+        "Write a contact form where every input has a label; complete it using only Tab and Enter",
+        "Run a page through the W3C validator and fix every error"
+      ],
+      "build": {
+        "title": "Personal profile page",
+        "brief": "A one-page profile: who you are, what you design, three pieces of work, and a contact form. HTML only this week; styling comes in Week 2. Structure first."
+      },
+      "prove": "Mastery test: build a semantic page from a blank file with no tutorial open.",
+      "masteryId": "m01",
+      "reflect": ["Which element did you reach for out of habit (a div?) and replace with something meaningful?"],
+      "ship": "Profile page saved in a project folder you will push to GitHub in Week 3, and opened by one other person on their device.",
+      "tryFirst": {
+        "task": "Mark up a navigation bar with three links (Work, About, Contact) so that a screen reader announces it as navigation.",
+        "hint": "There is an element whose whole job is 'this is a group of navigation links'. Lists are also announced with their item count.",
+        "explanation": "Landmark elements (header, nav, main, footer) let assistive technology jump between regions. A nav containing a list is announced as 'navigation, list, 3 items': structure a pile of divs can't express.",
+        "solution": "<nav aria-label=\"Primary\">\n  <ul>\n    <li><a href=\"#work\">Work</a></li>\n    <li><a href=\"#about\">About</a></li>\n    <li><a href=\"#contact\">Contact</a></li>\n  </ul>\n</nav>"
+      },
+      "resources": [
+        { "title": "MDN · Learn web development", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development", "type": "docs" },
+        { "title": "MDN · HTML elements reference", "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element", "type": "docs" },
+        { "title": "W3C Markup Validator", "url": "https://validator.w3.org/", "type": "practice" }
+      ]
+    },
+    {
+      "n": 2,
+      "month": 1,
+      "title": "CSS fundamentals",
+      "objective": "Turn structure into a designed, responsive page, and understand the layout engine instead of nudging pixels.",
+      "areas": ["frontend"],
+      "hours": [5, 7],
+      "learn": [
+        "The cascade, specificity and inheritance",
+        "The box model: content, padding, border, margin, box-sizing",
+        "Typography on the web: font stacks, rem, line-height, measure",
+        "Flexbox for one-dimensional layout",
+        "Grid for two-dimensional layout",
+        "Responsive design: fluid widths, media queries, clamp()",
+        "Custom properties (CSS variables) as design tokens",
+        "Focus states and colour contrast"
+      ],
+      "practice": [
+        "Recreate a type scale from one of your Figma files using rem and custom properties",
+        "Play Grid Garden, then build the same layouts again from memory",
+        "Make a card component that reflows from 1 to 2 to 3 columns",
+        "Find what causes horizontal scroll at 375px using DevTools, and fix it"
+      ],
+      "build": {
+        "title": "Responsive landing page",
+        "brief": "A landing page for a real or imagined studio service. Design it in Figma first, then build it. It must work from 375px to 1440px with no horizontal scroll."
+      },
+      "prove": "Mastery test: recreate a reference design using only HTML and CSS.",
+      "masteryId": "m02",
+      "reflect": ["Where did your Figma design and the browser disagree, and who was right?"],
+      "ship": "Landing page viewable on your phone, with screenshots at 375px and 1440px.",
+      "tryFirst": {
+        "task": "Make a row of three cards that sit side by side on desktop and stack on phones, without writing a media query.",
+        "hint": "Grid can decide the number of columns itself if you tell it the minimum width a card may have.",
+        "explanation": "repeat(auto-fit, minmax(240px, 1fr)) asks the browser to fit as many columns of at least 240px as the container allows, then share out the leftover space. The layout responds to its container, not to device breakpoints.",
+        "solution": ".cards {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n  gap: 1.5rem;\n}"
+      },
+      "resources": [
+        { "title": "MDN · CSS styling basics", "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics", "type": "docs" },
+        { "title": "web.dev · Learn CSS", "url": "https://web.dev/learn/css", "type": "tutorial" },
+        { "title": "CSS-Tricks · A complete guide to Flexbox", "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/", "type": "article" },
+        { "title": "Grid Garden", "url": "https://cssgridgarden.com/", "type": "practice" }
+      ]
+    },
+    {
+      "n": 3,
+      "month": 1,
+      "title": "Git and GitHub",
+      "objective": "Put your work under version control and on GitHub, so your history becomes evidence and your mistakes become recoverable.",
+      "areas": ["programming"],
+      "hours": [5, 7],
+      "learn": [
+        "Repositories: what Git tracks and what it ignores (.gitignore)",
+        "Commits: staging, and writing messages that explain why",
+        "Branches: working on a change without touching main",
+        "Pull requests: proposing and reviewing a change",
+        "README: the front door of a project",
+        "Version history: log, diff, revert, restore"
+      ],
+      "practice": [
+        "Complete the Introduction sequence on Learn Git Branching",
+        "Make 5 small commits to your profile page with messages a stranger would understand",
+        "Create a branch, change the hero copy, open a pull request to yourself, and merge it",
+        "Delete a file on purpose, commit, then recover it from history"
+      ],
+      "build": {
+        "title": "Put an actual project on GitHub",
+        "brief": "Push your Week 2 landing page to a GitHub repository with a README covering what it is, a screenshot, how to run it, and what you learned. Turn on GitHub Pages if the repository is public."
+      },
+      "prove": "Mastery test: recover from a deliberately broken branch.",
+      "masteryId": "m03",
+      "reflect": ["What would have been lost before this week if your laptop had died?"],
+      "ship": "Repository URL with at least 5 meaningful commits, one merged pull request, and a README.",
+      "tryFirst": {
+        "task": "You committed a change that broke the page. Undo it without deleting history.",
+        "hint": "There is a command that creates a new commit which is the exact opposite of an old one.",
+        "explanation": "git revert <commit> adds a new commit that undoes a previous one. History stays honest: anyone can see what happened and why. git reset rewrites history and is dangerous on shared branches.",
+        "solution": "git log --oneline     # find the bad commit, e.g. a1b2c3d\ngit revert a1b2c3d    # creates an 'undo' commit\ngit push"
+      },
+      "resources": [
+        { "title": "Pro Git (free book)", "url": "https://git-scm.com/book/en/v2", "type": "book" },
+        { "title": "GitHub · Hello World", "url": "https://docs.github.com/en/get-started/start-your-journey/hello-world", "type": "tutorial" },
+        { "title": "Learn Git Branching", "url": "https://learngitbranching.js.org/", "type": "practice" },
+        { "title": "Make a README", "url": "https://www.makeareadme.com/", "type": "article" }
+      ]
+    },
+    {
+      "n": 4,
+      "month": 1,
+      "title": "Web fundamentals + first mini-project",
+      "objective": "Understand what happens between typing a URL and seeing a page, and ship a complete page that proves it.",
+      "areas": ["frontend", "programming"],
+      "hours": [5, 7],
+      "learn": [
+        "URL to DNS to HTTP request to response: the journey of a page",
+        "How the browser parses HTML into the DOM and CSS into the CSSOM",
+        "Render tree, layout and paint, and why some CSS is expensive",
+        "Where JavaScript runs and how it changes the DOM",
+        "DevTools: Network, Elements and Console panels",
+        "Performance basics: image sizes, fonts, Lighthouse"
+      ],
+      "practice": [
+        "Open the Network panel on 3 sites; note request count, page weight and the slowest file",
+        "Add 10 lines of JavaScript that toggle a menu, and watch the DOM change in Elements",
+        "Run Lighthouse on your landing page and fix the top 3 issues",
+        "Draw the URL-to-pixels journey from memory"
+      ],
+      "build": {
+        "title": "A complete responsive webpage",
+        "brief": "Extend your landing page into a small complete site: 2–3 sections, a working mobile menu (a few lines of JS), optimised images, a Lighthouse accessibility score of at least 95, deployed on GitHub Pages or Netlify."
+      },
+      "prove": "Mastery test: explain how browser, HTML, CSS and JavaScript work together, using your own site.",
+      "masteryId": "m04",
+      "reflect": ["Which part of the URL-to-pixels journey was invisible to you before this week?"],
+      "ship": "Live URL on a free host, linked from the README, plus a Lighthouse screenshot.",
+      "tryFirst": {
+        "task": "Your page shows a menu button on mobile, but tapping it does nothing. Make it open and close the navigation.",
+        "hint": "Find the button and the nav in JavaScript, listen for a click, and flip something the CSS can respond to. Also tell assistive technology whether the menu is open.",
+        "explanation": "JavaScript shouldn't style things directly. It changes state (a class or an attribute) and CSS reacts. aria-expanded keeps the visual state and the accessible state in sync.",
+        "solution": "const button = document.querySelector('.menu-button');\nconst nav = document.querySelector('#site-nav');\n\nbutton.addEventListener('click', () => {\n  const open = button.getAttribute('aria-expanded') === 'true';\n  button.setAttribute('aria-expanded', String(!open));\n  nav.classList.toggle('is-open', !open);\n});"
+      },
+      "resources": [
+        { "title": "MDN · How browsers work", "url": "https://developer.mozilla.org/en-US/docs/Web/Performance/How_browsers_work", "type": "article" },
+        { "title": "Chrome DevTools · Network panel", "url": "https://developer.chrome.com/docs/devtools/network", "type": "docs" },
+        { "title": "web.dev · Learn Performance", "url": "https://web.dev/learn/performance", "type": "tutorial" },
+        { "title": "GitHub Pages quickstart", "url": "https://docs.github.com/en/pages/quickstart", "type": "docs" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m01",
+      "week": 1,
+      "area": "frontend",
+      "title": "Semantic webpage from a blank file",
+      "challenge": "Build a semantic webpage about a topic you know well (your design process, a city, a craft), starting from an empty file.",
+      "constraints": [
+        "No tutorial open while building",
+        "No copy-paste from other pages; looking things up on MDN is allowed",
+        "HTML only (minimal CSS allowed); no frameworks"
+      ],
+      "criteria": [
+        "Uses header, nav, main, footer and at least two sections with headings",
+        "Heading levels form a correct outline with no skipped levels",
+        "Every image has meaningful alt text (or empty alt if decorative)",
+        "Every form control has a visible label and can be reached with Tab",
+        "Passes the W3C validator with no errors",
+        "You can explain why each landmark element exists"
+      ],
+      "evidence": ["screenshot", "explanation"]
+    },
+    {
+      "id": "m02",
+      "week": 2,
+      "area": "frontend",
+      "title": "Recreate a reference design in HTML/CSS",
+      "challenge": "Pick a reference screen (a landing section from a site you admire, or one of your own Figma frames) and recreate it using only HTML and CSS.",
+      "constraints": [
+        "Only HTML and CSS: no frameworks, no UI kits, no JavaScript",
+        "Don't copy the reference site's source; inspect it only for measurements",
+        "Time-box: 4 hours"
+      ],
+      "criteria": [
+        "Close visual match at desktop width (overlay a screenshot to check)",
+        "Works at 375px with no horizontal scroll",
+        "Uses custom properties for colour, spacing and type",
+        "Layout uses Flexbox/Grid, not absolute-positioning hacks",
+        "Visible focus state on every interactive element",
+        "You can explain each layout decision"
+      ],
+      "evidence": ["screenshot", "explanation"]
+    },
+    {
+      "id": "m03",
+      "week": 3,
+      "area": "programming",
+      "title": "Recover from a broken branch",
+      "challenge": "On a feature branch, three commits break the page and one good change is buried among them. Recover a working main branch that keeps the good change.",
+      "constraints": [
+        "Command line or GitHub Desktop are both fine, but you must explain each step",
+        "No deleting and re-cloning the repository",
+        "No force-pushing to main"
+      ],
+      "criteria": [
+        "main works correctly at the end",
+        "The good change is preserved",
+        "History shows what happened (revert or cherry-pick, not erased)",
+        "Every command you ran is written down with the reason",
+        "You can explain the difference between revert, reset and restore"
+      ],
+      "evidence": ["github", "explanation"]
+    },
+    {
+      "id": "m04",
+      "week": 4,
+      "area": "frontend",
+      "title": "Explain the browser pipeline",
+      "challenge": "Explain, out loud or in writing and without notes, how the browser turns a URL into an interactive page, using your own deployed site as the example.",
+      "constraints": [
+        "No notes or slides while explaining; a blank sheet for drawing is fine",
+        "Use your own site's Network panel as evidence",
+        "Record it (voice memo or screen recording) or write it in 600 words or fewer"
+      ],
+      "criteria": [
+        "Covers request, response, HTML parsing, DOM/CSSOM, layout and paint",
+        "Explains where and when JavaScript runs and how it changes the DOM",
+        "Points at one real request in your Network panel and explains its status, size and timing",
+        "Names one performance improvement you made and why it helped",
+        "Someone non-technical could follow it"
+      ],
+      "evidence": ["live", "explanation"]
+    }
+  ]
+}

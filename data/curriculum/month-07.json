@@ -1,0 +1,204 @@
+{
+  "month": {
+    "n": 7,
+    "title": "AI engineering",
+    "theme": "Treat model output as uncertain software behaviour, and build features that are useful, measurable and under human control.",
+    "build": "AI-powered feature",
+    "mastery": "Build an AI feature with structured output and basic evaluation.",
+    "checkpoint": "An AI feature with server-side model calls, validated structured output, a 20-case evaluation set and a review/edit flow."
+  },
+  "weeks": [
+    {
+      "n": 25,
+      "month": 7,
+      "title": "LLM fundamentals",
+      "objective": "Understand what a language model actually does, so you can predict where it will help and where it will fail.",
+      "areas": ["ai"],
+      "hours": [6, 8],
+      "learn": [
+        "Models predict tokens, and what that implies",
+        "Tokens, context windows and cost",
+        "Temperature and sampling",
+        "Training data, knowledge cutoffs, and why models 'hallucinate'",
+        "System prompts, user messages and roles",
+        "Model trade-offs: capability vs latency vs cost",
+        "Open vs closed models; running locally vs via an API"
+      ],
+      "practice": [
+        "Count tokens for the same paragraph in two different tokenizers",
+        "Ask the same question five times at a low and at a high temperature; compare",
+        "Find three questions a model answers confidently and wrongly",
+        "Run the same task in two different providers' playgrounds"
+      ],
+      "build": {
+        "title": "Model field notes",
+        "brief": "A small comparison page: one realistic design-studio task (for example turning a client brief into a project scope) run across 2–3 models, with notes on quality, latency, cost and failure modes."
+      },
+      "prove": "Explain to a non-technical colleague why the model 'made something up', and what you'd do about it in a product.",
+      "masteryId": null,
+      "reflect": ["What did you believe about LLMs at the start of the week that turned out to be wrong?"],
+      "ship": "Field notes page on GitHub.",
+      "tryFirst": {
+        "task": "Estimate the cost of summarising 1,000 client briefs of about 1,500 words each into 150-word summaries.",
+        "hint": "Roughly, 1 token ≈ 0.75 English words. Input and output are priced separately per million tokens. Look up a current price for one model.",
+        "explanation": "Cost = input tokens × input price + output tokens × output price. Doing this arithmetic before building tells you whether a feature is viable, which model tier to use, and whether to cache or batch.",
+        "solution": "Input:  1,500 words ≈ 2,000 tokens × 1,000 = 2,000,000 tokens\nOutput:   150 words ≈   200 tokens × 1,000 =   200,000 tokens\n\nAt an example price of $1 per million input tokens and $5 per million output tokens:\n2 × $1 + 0.2 × $5 = $3.00 for the whole batch\n\n(Prices change. Always check the provider's current pricing page.)"
+      },
+      "resources": [
+        { "title": "Andrej Karpathy · Intro to Large Language Models", "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g", "type": "video" },
+        { "title": "Hugging Face · LLM Course", "url": "https://huggingface.co/learn/llm-course", "type": "tutorial" },
+        { "title": "OpenAI · Tokenizer", "url": "https://platform.openai.com/tokenizer", "type": "practice" }
+      ]
+    },
+    {
+      "n": 26,
+      "month": 7,
+      "title": "Model APIs",
+      "objective": "Call models from your own server safely, with cost, latency and failures under control.",
+      "areas": ["ai", "backend"],
+      "hours": [6, 8],
+      "learn": [
+        "API keys, server-side calls, environment variables",
+        "Request structure: model, messages, max tokens",
+        "Streaming responses",
+        "Errors: rate limits, timeouts, overloaded models",
+        "Retries with backoff",
+        "Cost guards: input caps, output caps, usage logging",
+        "Hiding the provider behind your own interface so you can switch"
+      ],
+      "practice": [
+        "Make a first API call from a script with two different providers",
+        "Stream a response into a page",
+        "Handle a forced error (bad key, tiny max tokens)",
+        "Log tokens used and cost per call"
+      ],
+      "build": {
+        "title": "'Summarise this brief' endpoint",
+        "brief": "Add a server-side endpoint to one of your apps that summarises pasted text. The key stays on the server, input length is capped, the UI shows loading or streaming, errors are clear, and usage is logged."
+      },
+      "prove": "Show that the key never reaches the browser, and that a 50,000-word paste is rejected before it costs you money.",
+      "masteryId": null,
+      "reflect": ["Where would this feature break at 100× the users?"],
+      "ship": "Deployed endpoint, with a README section on cost and limits.",
+      "tryFirst": {
+        "task": "Write a provider-agnostic function your app calls to summarise text, so that switching model providers later touches one file.",
+        "hint": "Your app shouldn't know which company's SDK sits underneath. Define the input and output you need, and hide the provider behind that.",
+        "explanation": "An adapter (a thin interface around the provider) keeps vendor details in one place. It also centralises the guards (input caps, timeouts, logging) so every call gets them.",
+        "solution": "// lib/ai.ts\nexport interface Summariser {\n  summarise(text: string): Promise<string>;\n}\n\nconst MAX_CHARS = 20_000;\n\nexport async function summarise(text: string, provider: Summariser) {\n  if (text.length > MAX_CHARS) throw new Error('Text too long');\n  const started = Date.now();\n  const summary = await provider.summarise(text);\n  console.info('summarise', { ms: Date.now() - started, chars: text.length });\n  return summary;\n}"
+      },
+      "resources": [
+        { "title": "Anthropic · API getting started", "url": "https://docs.anthropic.com/en/api/getting-started", "type": "docs" },
+        { "title": "OpenAI · Developer quickstart", "url": "https://platform.openai.com/docs/quickstart", "type": "docs" },
+        { "title": "Google · Gemini API docs", "url": "https://ai.google.dev/gemini-api/docs", "type": "docs" }
+      ]
+    },
+    {
+      "n": 27,
+      "month": 7,
+      "title": "Prompting and structured outputs",
+      "objective": "Get reliable, machine-readable output from a model, and never trust it without validating it.",
+      "areas": ["ai"],
+      "hours": [6, 8],
+      "learn": [
+        "Clear task framing, context and examples (few-shot)",
+        "System prompts and roles",
+        "Structured output: JSON schemas and tool-based output",
+        "Validating model output with a schema",
+        "Handling refusals, partial output and malformed output",
+        "Versioning prompts",
+        "When a plain deterministic function beats a model"
+      ],
+      "practice": [
+        "Write the same prompt three ways (vague, specific, with examples) and compare",
+        "Ask for JSON matching a schema and validate it with Zod",
+        "Feed it inputs designed to break the format",
+        "Keep your prompts in versioned files, not inline strings"
+      ],
+      "build": {
+        "title": "Brief-to-scope extractor",
+        "brief": "Paste a messy client brief and get back validated JSON (deliverables, deadlines, budget signals, open questions, risks), shown as an editable form."
+      },
+      "prove": "Run 15 varied briefs through it. Record how many produce valid, correct output, and categorise the failures.",
+      "masteryId": null,
+      "reflect": ["Which failures were the model's fault, and which were your prompt's?"],
+      "ship": "Extractor deployed, with a prompts/ folder and a failures table in the README.",
+      "tryFirst": {
+        "task": "Your model returns JSON most of the time, but sometimes adds commentary or misses fields. Make the feature safe.",
+        "hint": "Two layers: ask for structure in the way the API supports best, then check what came back before using it.",
+        "explanation": "Use the provider's structured-output or tool mechanism where available, then validate with a schema anyway. On failure, retry once; if it still fails, show a recoverable state. Never render unvalidated output.",
+        "solution": "const Scope = z.object({\n  deliverables: z.array(z.string()).min(1),\n  deadline: z.string().nullable(),\n  openQuestions: z.array(z.string()),\n});\n\nasync function extractScope(brief: string) {\n  for (let attempt = 1; attempt <= 2; attempt++) {\n    const raw = await model.generateJson(brief, Scope);   // your provider adapter\n    const parsed = Scope.safeParse(raw);\n    if (parsed.success) return parsed.data;\n  }\n  return null; // UI: 'Could not structure this brief. Edit it manually.'\n}"
+      },
+      "resources": [
+        { "title": "Anthropic · Prompt engineering overview", "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview", "type": "docs" },
+        { "title": "OpenAI · Structured outputs", "url": "https://platform.openai.com/docs/guides/structured-outputs", "type": "docs" },
+        { "title": "JSON Schema · Getting started", "url": "https://json-schema.org/learn/getting-started-step-by-step", "type": "docs" }
+      ]
+    },
+    {
+      "n": 28,
+      "month": 7,
+      "title": "AI product UX + evaluation",
+      "objective": "Design AI features people can trust, and measure whether they work before you polish them.",
+      "areas": ["ai", "product"],
+      "hours": [6, 8],
+      "learn": [
+        "Human control: review, edit, accept, undo",
+        "Showing uncertainty and sources",
+        "Latency UX: streaming, skeletons, progress",
+        "Evaluation sets: representative inputs and expected outcomes",
+        "Rubrics and simple scoring",
+        "Regression-testing prompts",
+        "Collecting user feedback in the product"
+      ],
+      "practice": [
+        "Write 20 test cases for your extractor, including nasty edge cases",
+        "Score two prompt versions against the same set",
+        "Design the review/edit flow in Figma first",
+        "Add thumbs up/down with a reason"
+      ],
+      "build": {
+        "title": "Extractor with review flow + eval set",
+        "brief": "Add a review/edit/accept flow to your extractor, and a repeatable evaluation script over 20 cases with a simple scoreboard."
+      },
+      "prove": "Mastery test: build an AI feature with structured output and basic evaluation.",
+      "masteryId": "m10",
+      "reflect": ["What did evaluation reveal that demo-testing never would have?"],
+      "ship": "Deployed AI feature, with an evaluation results table in the README.",
+      "tryFirst": {
+        "task": "Design a tiny evaluation for your brief extractor that you can re-run after every prompt change.",
+        "hint": "Fix a set of inputs. For each one, decide what 'correct' means in checkable terms. Count; don't go on vibes.",
+        "explanation": "An eval is a test suite for behaviour: fixed cases, explicit checks, and a score you can compare across versions. Start with simple automated checks (fields present, known deadline found) plus a human-scored rubric.",
+        "solution": "const cases = [\n  { brief: 'Logo + 10 social posts by 15 Nov, budget ~40k', expect: { deadline: '15 Nov', minDeliverables: 2 } },\n  // ...19 more, including empty, rambling and non-English briefs\n];\n\nlet passed = 0;\nfor (const c of cases) {\n  const out = await extractScope(c.brief);\n  const ok = out !== null\n    && out.deliverables.length >= c.expect.minDeliverables\n    && (c.expect.deadline === undefined || (out.deadline ?? '').includes(c.expect.deadline));\n  if (ok) passed++;\n}\nconsole.log(`${passed}/${cases.length} passed`);"
+      },
+      "resources": [
+        { "title": "Google PAIR · People + AI Guidebook", "url": "https://pair.withgoogle.com/guidebook/", "type": "article" },
+        { "title": "Hamel Husain · Your AI product needs evals", "url": "https://hamel.dev/blog/posts/evals/", "type": "article" },
+        { "title": "Microsoft · Guidelines for human-AI interaction", "url": "https://www.microsoft.com/en-us/haxtoolkit/ai-guidelines/", "type": "article" }
+      ]
+    }
+  ],
+  "mastery": [
+    {
+      "id": "m10",
+      "week": 28,
+      "area": "ai",
+      "title": "AI feature with structured output and evaluation",
+      "challenge": "Ship an AI feature that does one real job for a user (from your own work or a problem in your Opportunity Lab), returns validated structured output, and is measured by an evaluation set.",
+      "constraints": [
+        "Model calls only from the server; no keys in the browser",
+        "The provider is hidden behind your own adapter",
+        "AI coding help is allowed, but you must pass the ownership check",
+        "Synthetic or permissioned data only"
+      ],
+      "criteria": [
+        "Output is validated against a schema before display, and invalid output is handled",
+        "At least 20 evaluation cases with a recorded score",
+        "Two prompt or model versions compared with numbers",
+        "The user can review, edit or reject output before it's saved",
+        "Cost per use estimated and capped",
+        "You can explain every file that touches the model"
+      ],
+      "evidence": ["github", "live", "explanation"]
+    }
+  ]
+}
