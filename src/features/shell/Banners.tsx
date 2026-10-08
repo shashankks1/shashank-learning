@@ -4,6 +4,7 @@ import { Icon } from '../../components/Icon';
 import { createEmptyData } from '../../lib/schema';
 import { useStore } from '../../store/store';
 import { useUi } from './ui-context';
+import { SyncProblemBanner } from '../sync/SyncPanel';
 
 /** System-level problems the learner must know about. Never silent. */
 export function StatusBanners() {
@@ -13,6 +14,7 @@ export function StatusBanners() {
 
   return (
     <div className="banners">
+      <SyncProblemBanner />
       {changedElsewhere && (
         <div className="banner banner--attention" role="alert">
           <Icon name="alert" />

@@ -302,9 +302,28 @@ export function SyncStatusBadge({ compact = false }: { compact?: boolean }) {
     : status.lastSyncedAt ? `Synced ${formatAgo(status.lastSyncedAt)}`
     : 'Sync on';
   return (
-    <a className={`sync-badge sync-badge--${status.phase} ${compact ? 'sync-badge--compact' : ''}`} href="#/settings" title={status.message ?? label}>
+    <a
+      className={`sync-badge sync-badge--${status.phase} ${dirty && status.phase === 'idle' ? 'sync-badge--pending' : ''} ${compact ? 'sync-badge--compact' : ''}`}
+      href="#/settings"
+      title={status.message ?? label}
+      aria-label={compact ? `Sync: ${label}` : undefined}
+    >
       <span className="sync-badge__dot" aria-hidden="true" />
-      <span>{label}</span>
+      <span className={compact ? 'visually-hidden' : undefined}>{label}</span>
     </a>
+  );
+}
+
+/** Shown app-wide only when sync has actually stopped and needs a person. Never for brief offline moments. */
+export function SyncProblemBanner() {
+  const { status, config, syncNow } = useSync();
+  if (!config || status.phase !== 'error') return null;
+  return (
+    <div className="banner banner--attention" role="alert">
+      <Icon name="alert" />
+      <p><strong>Sync has stopped.</strong> {status.message} Your work is safe on this device in the meantime.</p>
+      <Button size="sm" onClick={() => void syncNow()}>Try again</Button>
+      <a className="btn btn--primary btn--sm" href="#/settings">Fix in Settings</a>
+    </div>
   );
 }

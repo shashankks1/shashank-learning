@@ -1847,6 +1847,24 @@
   background: var(--faint);
 }
 
+.sync-badge--pending .sync-badge__dot {
+  background: var(--warn);
+}
+
+.sync-badge--compact {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.sync-badge--compact .sync-badge__dot {
+  width: 10px;
+  height: 10px;
+}
+
 .sync-badge--error {
   color: var(--bad);
 }

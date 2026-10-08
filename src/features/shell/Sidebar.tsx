@@ -86,6 +86,7 @@ export function MobileTopBar({ onMenu }: { onMenu: () => void }) {
         <span className="brand__name">Level 1</span>
       </a>
       <div className="mobile-top__actions">
+        <SyncStatusBadge compact />
         <SessionTimer compact />
         <button type="button" className="icon-btn" aria-label="Search" onClick={ui.openPalette}>
           <Icon name="search" />

@@ -6,7 +6,7 @@ A local-first personal apprenticeship system: 52 weeks from semantic HTML to a p
 
 No backend and no account. Your data lives in your browser, and optionally syncs across your devices through a **private** GitHub repo you own.
 
-**Live:** https://shashankks1.github.io/shashank-learning/. Open it on any device. On a phone, use *Add to Home Screen* and it opens like an app.
+**Live:** https://shashankks1.github.io/shashank-learning/. Open it on any device. On a phone, use *Add to Home Screen* and it opens like an app, even with no connection (edits sync when you're back online).
 
 ## Run it locally
 
@@ -44,11 +44,11 @@ Want deploys to happen automatically on every push instead? Add a GitHub Actions
 Each browser keeps its own copy, so sync keeps your phone and laptop in step automatically:
 
 1. Create a **private** repo for your data, e.g. `level-1-data`. The app refuses to sync to a public repo.
-2. Create a [fine-grained token](https://github.com/settings/personal-access-tokens/new) with access to **only that repo** and **Contents: Read and write**.
+2. Create a [fine-grained token](https://github.com/settings/personal-access-tokens/new?name=Level%201%20sync&target_name=shashankks1&expires_in=none&contents=write) with access to **only that repo** and **Contents: Read and write**. No expiry, so setup never has to be repeated; revoke it on GitHub any time.
 3. In the app: **Settings → Sync** → paste `your-username/level-1-data` and the token → *Connect and sync*.
 4. On your phone: on the laptop, choose **Connect another device** and scan the QR code. It opens the app connected and pulls your data.
 
-Sync runs on open, when you return to the app, ~6 seconds after you stop editing, and every 2 minutes while open. If both devices were edited offline, the newer copy wins and the other is kept under *Settings → Sync → Saved copies*; nothing is silently lost. Every sync is a commit, so the data repo also gives you full history. The token is stored only on the device, and is never exported or synced. Demo data is never uploaded.
+Sync runs on open, when you return to the app, ~6 seconds after you stop editing, and every 2 minutes while open. A dot shows its state: green synced, amber changes waiting, grey offline. It's in the sidebar, and in the top bar on phones. If sync ever stops for a reason that needs you (e.g. the token was revoked), a banner says why and links to the fix. If both devices were edited offline, the newer copy wins and the other is kept under *Settings → Sync → Saved copies*; nothing is silently lost. Every sync is a commit, so the data repo also gives you full history. The token is stored only on the device, and is never exported or synced. Demo data is never uploaded.
 
 ## Your data
 

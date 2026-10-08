@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.0 — 2026-10-08
+
+- Opens offline (service worker: page network-first, hashed assets cached; GitHub calls never cached).
+- Sync status dot in the phone top bar; amber when changes are waiting.
+- App-wide banner when sync has stopped and needs attention, with Try again / Fix in Settings.
+- Setup links that name the data repo, so only the token needs pasting.
+
 ## 2.1.0 — 2026-10-08
 
 - **Deployed to GitHub Pages** from the `gh-pages` branch; `npm run deploy` tests, builds and publishes.

@@ -86,7 +86,7 @@ export function createGitHubClient(ref: RepoRef, fetcher: typeof fetch = fetch.b
     } catch {
       throw new SyncError('Can’t reach GitHub. You may be offline; changes will sync when you’re back.', 'offline');
     }
-    if (response.status === 401) throw new SyncError('GitHub rejected the token. It may have expired; create a new one and reconnect.', 'auth');
+    if (response.status === 401) throw new SyncError('GitHub no longer accepts the sync token (it was revoked or expired). Create a new one and reconnect in Settings → Sync.', 'auth');
     if (response.status === 403 && response.headers.get('x-ratelimit-remaining') === '0') {
       throw new SyncError('GitHub’s rate limit was reached. Sync will retry shortly.', 'rate-limit');
     }
