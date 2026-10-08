@@ -41,8 +41,14 @@ export function ConnectFromLink({ encoded }: { encoded: string | undefined }) {
         ) : payload ? (
           <section className="onboarding__screen">
             <p className="onboarding__index">Sync</p>
-            <h1 className="onboarding__title onboarding__title--sm">Connect to your data in {payload.owner}/{payload.repo}?</h1>
-            <p className="onboarding__body">Your progress will download to this device and stay in sync with your other devices. The token is stored only in this browser.</p>
+            <h1 className="onboarding__title onboarding__title--sm">
+              {payload.token ? `Connect to your data in ${payload.owner}/${payload.repo}?` : `Paste your sync token to connect ${payload.owner}/${payload.repo}`}
+            </h1>
+            <p className="onboarding__body">
+              {payload.token
+                ? 'Your progress will download to this device and stay in sync with your other devices. The token is stored only in this browser.'
+                : 'Paste the token you just generated on GitHub (it starts with github_pat_). It’s stored only in this browser, never exported or synced.'}
+            </p>
             <ConnectForm compact initial={{ repo: `${payload.owner}/${payload.repo}`, token: payload.token }} onConnected={finish} />
           </section>
         ) : (

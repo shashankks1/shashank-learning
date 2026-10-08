@@ -90,11 +90,17 @@ export function createPairingLink(config: Pick<SyncConfig, 'owner' | 'repo' | 't
   return `${appUrl.split('#')[0]}#/connect/${toBase64Url(JSON.stringify(payload))}`;
 }
 
+/** A setup link that names the repository but leaves the token for the learner to paste. */
+export function createSetupLink(owner: string, repo: string, appUrl: string): string {
+  return `${appUrl.split('#')[0]}#/connect/${toBase64Url(JSON.stringify({ o: owner, r: repo }))}`;
+}
+
+/** Token is '' for setup links that only name the repository. */
 export function readPairingPayload(encoded: string): { owner: string; repo: string; token: string } | null {
   try {
     const payload = JSON.parse(fromBase64Url(encoded)) as Partial<LinkPayload>;
-    if (!payload.o || !payload.r || !payload.t) return null;
-    return { owner: payload.o, repo: payload.r, token: payload.t };
+    if (!payload.o || !payload.r) return null;
+    return { owner: payload.o, repo: payload.r, token: payload.t ?? '' };
   } catch {
     return null;
   }

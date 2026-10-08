@@ -4,7 +4,7 @@ import { createEmptyData, newBuild } from '../src/lib/schema';
 import { createDemoData } from '../src/lib/demo';
 import { addBuild, toggleWeekItem } from '../src/store/actions';
 import { connect, DATA_PATH, IMAGES_DIR, syncOnce, type SyncDeps } from '../src/sync/engine';
-import { createPairingLink, parseRepoInput, readPairingPayload, type SyncConfig } from '../src/sync/config';
+import { createPairingLink, createSetupLink, parseRepoInput, readPairingPayload, type SyncConfig } from '../src/sync/config';
 import { base64ToText, SyncConflictError, textToBase64, type GitHubClient } from '../src/sync/github';
 
 /** In-memory stand-in for one private GitHub repository. */
@@ -218,5 +218,10 @@ describe('sync config helpers', () => {
     expect(encoded).not.toMatch(/[/+=]/);
     expect(readPairingPayload(encoded)).toEqual({ owner: 'me', repo: 'level-1-data', token: 'github_pat_ABC_123' });
     expect(readPairingPayload('garbage')).toBeNull();
+  });
+
+  it('setup links name the repository but carry no token', () => {
+    const link = createSetupLink('me', 'level-1-data', 'https://me.github.io/app/');
+    expect(readPairingPayload(link.split('#/connect/')[1])).toEqual({ owner: 'me', repo: 'level-1-data', token: '' });
   });
 });
